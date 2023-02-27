@@ -6,7 +6,7 @@
   <link href="https://blog.zepo.re/atom.xml" rel="self"/>
   
   <link href="https://blog.zepo.re/"/>
-  <updated>2023-02-15T11:44:36.377Z</updated>
+  <updated>2023-02-27T03:03:51.323Z</updated>
   <id>https://blog.zepo.re/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>23-02-22</title>
+    <link href="https://blog.zepo.re/2023/02/22/2023-02-22.html/"/>
+    <id>https://blog.zepo.re/2023/02/22/2023-02-22.html/</id>
+    <published>2023-02-22T13:54:02.000Z</published>
+    <updated>2023-02-27T03:03:51.323Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="23-02-22"><a href="#23-02-22" class="headerlink" title="23-02-22"></a>23-02-22</h1><h2 id="������˳��"><a href="#������˳��" class="headerlink" title="������˳��"></a>������˳��</h2><p><code>function name(�����б�) �ɼ��� ���η� returns(�������� ����ֵ����)</code></p><p>���� Solidity 0.5.0 �汾֮ǰ�ɼ��Ժͷ��ز�����λ�ÿ��Խ����⣬�� Solidity 0.5.0 �汾��ʼ�������������밴������˳��</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">function functionName(parameterList) visibilityModifier stateMutabilityModifier virtualModifier overrideModifier returns (returnTypes)<br></code></pre></td></tr></table></figure><p>��Щ����Ӧ�ð�������˳����У�</p><ul><li>��������</li><li>�����б�</li><li>�ɼ������η���public��external��internal �� private��</li><li>״̬������η���pure��view��payable �򲻰������η���</li><li>�������η���virtual �򲻰������η���</li><li>�������η���override �򲻰������η���</li><li>����ֵ�б�</li></ul><h2 id="o�ֱ���"><a href="#o�ֱ���" class="headerlink" title="ȫ�ֱ���"></a>ȫ�ֱ���</h2><p><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/img_1.png"></p><h2 id="�����ɼ��ԣ��������������С�����η�"><a href="#�����ɼ��ԣ��������������С�����η�" class="headerlink" title="�����ɼ��ԣ��������������С�����η�"></a>�����ɼ��ԣ��������������С�����η�</h2><p>�����ɼ���ָ�ĵķ�Χ��Ƚϴ󣬶�����������ָ�Ķ�����һЩ��external���ڱ��������򷶳룬���������ڱ�����</p><h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><p>Public �C ����״̬�����������ڲ����ʣ�Ҳ����ͨ����Ϣ���ʡ����ڹ���״̬������������һ���Զ�getter������</p><h3 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h3><p>Internal �C �ڲ�״̬����ֻ�ܴӵ�ǰ��Լ����������Լ�ڷ��ʡ�</p><h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><p>Private �C ˽��״̬����ֻ�ܴӵ�ǰ��Լ�ڲ����ʣ�<strong>������Լ</strong> �ڲ��ܷ��ʡ�</p><h3 id="external"><a href="#external" class="headerlink" title="external"></a>external</h3><p>����ΪExternal�ĺ��� �� ֻ��ͨ�������ַ�ʽ��һ����ͨ���̳�&#x2F;��ͬ������������<strong>this</strong>���е���&#x2F;����this��&#x3D;&#x3D;��Լ��ַ�����ⲿ������&#x2F;����ͨ�����׷���</p><p><code>this.foo()</code> �� Solidity ��ȷʵҲ�� external �ĵ��÷�ʽ����Ϊ this �ؼ���ָ���ǵ�ǰ��Լ�ĵ�ַ��ͨ���������ú�Լ�еĺ����ȼ���ͨ���ⲿ��ַ���ú�Լ�еĺ�����</p><h2 id="��ͬ״̬"><a href="#��ͬ״̬" class="headerlink" title="��ͬ״̬"></a>��ͬ״̬</h2><p>�� Solidity �У���Լ��״̬��State����ָ��Լ������ʱ�����е�״̬�����ļ��ϡ���Щ״̬���������Ǹ������͵ı��������� uint��address��bool��mapping �ȡ�</p><h2 id="״̬������η�"><a href="#״̬������η�" class="headerlink" title="״̬������η�"></a>״̬������η�</h2><p>״̬������η����� pure��view �� payable ���֣�</p><ul><li><p>view ���η���ʾ���������޸ĺ�Լ״̬��ֻ��ȡ��Լ״̬������ֵ����ˣ�view �����ڵ��ù����в������� gas��������ѵ��ã���ʹ��δ����ĳ��ʱ��Ҳ������ѵ��á�</p></li><li><p>pure ���η���ʾ���������ȡ���޸ĺ�Լ״̬��ִֻ�м��㲢���ؽ������ˣ�pure �����ڵ��ù����в������� gas��������ѵ��ã���ʹ��δ����ĳ��ʱ��Ҳ������ѵ��á�</p></li><li><p>payable ���η���ʾ�������Խ�����̫�ң����һ��޸ĺ�Լ״̬���ڵ��� payable ����ʱ�������߱��뷢���㹻����̫����֧������ִ������� gas ���ú�ת�˽���ˣ�payable �����ڵ��ù����л����� gas����������Ҫ֧�� gas ���ã����ҵ����߷��͵���̫�һᱻת�Ƶ���Լ��ַ��</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;23-02-22&quot;&gt;&lt;a href=&quot;#23-02-22&quot; class=&quot;headerlink&quot; title=&quot;23-02-22&quot;&gt;&lt;/a&gt;23-02-22&lt;/h1&gt;&lt;h2 id=&quot;������˳��&quot;&gt;&lt;a href=&quot;#������˳��&quot; class=&quot;he</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>

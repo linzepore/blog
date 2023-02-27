@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.zepo.re/2023/02/22/2023-02-22.html/</loc>
+    
+    <lastmod>2023-02-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.zepo.re/Donate/index.html</loc>
     
     <lastmod>2023-02-15</lastmod>
@@ -22,12 +31,68 @@
 
   <url>
     <loc>https://blog.zepo.re/</loc>
-    <lastmod>2023-02-16</lastmod>
+    <lastmod>2023-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
+  <url>
+    <loc>https://blog.zepo.re/tags/tech/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/tags/learning/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/tags/blockchain/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/tags/solidity/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Learning/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Learning/Solidity/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Learning/Blockchain/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Competition/</loc>
+    <lastmod>2023-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
