@@ -6,7 +6,7 @@
   <link href="https://blog.zepo.re/atom.xml" rel="self"/>
   
   <link href="https://blog.zepo.re/"/>
-  <updated>2023-02-27T03:09:31.323Z</updated>
+  <updated>2023-02-27T03:19:07.664Z</updated>
   <id>https://blog.zepo.re/</id>
   
   <author>
@@ -15,6 +15,186 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>23-02-27</title>
+    <link href="https://blog.zepo.re/2023/02/27/2023-02-27.html/"/>
+    <id>https://blog.zepo.re/2023/02/27/2023-02-27.html/</id>
+    <published>2023-02-27T02:11:02.000Z</published>
+    <updated>2023-02-27T03:19:07.664Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-02-27"><a href="#2023-02-27" class="headerlink" title="2023-02-27"></a>2023-02-27</h1><h2 id="函数及多值返回"><a href="#函数及多值返回" class="headerlink" title="函数及多值返回"></a>函数及多值返回</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">// SPDX-License-Identifier: MIT<br>pragma solidity ^0.8.17;<br><br>contract Function &#123;<br>    // Functions can return multiple values.<br>    function returnMany() public pure returns (uint, bool, uint) &#123;<br>        return (1, true, 2);<br>    &#125;<br><br>    // Return values can be named.<br>    function named() public pure returns (uint x, bool b, uint y) &#123;<br>        return (1, true, 2);<br>    &#125;<br><br>    // Return values can be assigned to their name.<br>    // In this case the return statement can be omitted.<br>    function assigned() public pure returns (uint x, bool b, uint y) &#123;<br>        x = 1;<br>        b = true;<br>        y = 2;<br>    &#125;<br><br>    // Use destructuring assignment when calling another<br>    // function that returns multiple values.<br>    function destructuringAssignments()<br>        public<br>        pure<br>        returns (uint, bool, uint, uint, uint)<br>    &#123;<br>        (uint i, bool b, uint j) = returnMany();<br><br>        // Values can be left out.<br>        (uint x, , uint y) = (4, 5, 6);<br><br>        return (i, b, j, x, y);<br>    &#125;<br><br>    // Cannot use map for either input or output<br><br>    // Can use array for input<br>    function arrayInput(uint[] memory _arr) public &#123;&#125;<br><br>    // Can use array for output<br>    uint[] public arr;<br><br>    function arrayOutput() public view returns (uint[] memory) &#123;<br>        return arr;<br>    &#125;<br>&#125;<br><br>// Call function with key-value inputs<br>contract XYZ &#123;<br>    function someFuncWithManyInputs(<br>        uint x,<br>        uint y,<br>        uint z,<br>        address a,<br>        bool b,<br>        string memory c<br>    ) public pure returns (uint) &#123;&#125;<br><br>    function callFunc() external pure returns (uint) &#123;<br>        return someFuncWithManyInputs(1, 2, 3, address(0), true, &quot;c&quot;);<br>    &#125;<br><br>    function callFuncWithKeyValue() external pure returns (uint) &#123;<br>        return<br>            someFuncWithManyInputs(&#123;a: address(0), b: true, c: &quot;c&quot;, x: 1, y: 2, z: 3&#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-02-27&quot;&gt;&lt;a href=&quot;#2023-02-27&quot; class=&quot;headerlink&quot; title=&quot;2023-02-27&quot;&gt;&lt;/a&gt;2023-02-27&lt;/h1&gt;&lt;h2 id=&quot;函数及多值返回&quot;&gt;&lt;a href=&quot;#函数及多值返回&quot; class</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>23-02-26</title>
+    <link href="https://blog.zepo.re/2023/02/26/2023-02-26.html/"/>
+    <id>https://blog.zepo.re/2023/02/26/2023-02-26.html/</id>
+    <published>2023-02-26T13:54:02.000Z</published>
+    <updated>2023-02-27T03:19:07.638Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-02-26"><a href="#2023-02-26" class="headerlink" title="2023-02-26"></a>2023-02-26</h1><h2 id="calldata与memory的区别"><a href="#calldata与memory的区别" class="headerlink" title="calldata与memory的区别"></a>calldata与memory的区别</h2><p>在 Solidity 中，参数可以被声明为 calldata 或 memory。</p><p>calldata 表示参数值在调用函数时不会被修改，而是被传递到函数中。在函数内部，它们可以被视为常量，不能被修改。当函数调用结束时，这些值也将被销毁。在视觉上， calldata 参数类似于函数签名中的参数。</p><p>memory 表示参数值在调用函数时可以被修改，并且在函数调用结束后将保留修改后的值。在函数内部， memory 用于存储临时变量和复制的值，例如在函数内部创建的新数组或结构体。在函数结束后，调用方可以通过返回值或事件查看修改后的值。</p><p>在传递大量数据时，使用 calldata 通常比使用 memory 更高效，因为它不需要在函数调用中复制大量数据。但是，<strong>如果需要对传递的数据进行修改，则必须使用 memory</strong>。</p><h2 id="元组-Tuple"><a href="#元组-Tuple" class="headerlink" title="元组 Tuple"></a>元组 Tuple</h2><p>在solidity中经常看到返回值是元组的，记录一下(函数哪里会有更详细用法)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pragma solidity ^0.8.17;<br>//SPDX-License-Identifier:MIT<br>contract tuple_test &#123;<br>    function returnTul() public reuturns(uint, bool) &#123;<br>        //...<br>        reuturn (0, true);<br>    &#125;<br>    function getTul() view public &#123;<br>        uint myUint;<br>        bool myBool;<br>        (myUint, myBool) = returnTul();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="比较memory跟storage类型数据的string"><a href="#比较memory跟storage类型数据的string" class="headerlink" title="比较memory跟storage类型数据的string"></a>比较memory跟storage类型数据的string</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">if (keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b))) &#123;<br>    // do something<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-02-26&quot;&gt;&lt;a href=&quot;#2023-02-26&quot; class=&quot;headerlink&quot; title=&quot;2023-02-26&quot;&gt;&lt;/a&gt;2023-02-26&lt;/h1&gt;&lt;h2 id=&quot;calldata与memory的区别&quot;&gt;&lt;a href=&quot;#cal</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>23-02-25</title>
+    <link href="https://blog.zepo.re/2023/02/25/2023-02-25.html/"/>
+    <id>https://blog.zepo.re/2023/02/25/2023-02-25.html/</id>
+    <published>2023-02-25T13:54:02.000Z</published>
+    <updated>2023-02-27T03:19:07.605Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-02-25"><a href="#2023-02-25" class="headerlink" title="2023-02-25"></a>2023-02-25</h1><h2 id="Enum-枚举"><a href="#Enum-枚举" class="headerlink" title="Enum 枚举"></a>Enum 枚举</h2><p>一个合约可以有多个枚举</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pragma solidity ^0.8.0;<br><br>contract Example &#123;<br>    enum Status &#123; Pending, Approved, Rejected &#125;<br>    enum Color &#123; Red, Green, Blue &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>枚举的相关赋值方法以及重置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">//文件：test_enum.sol<br><br>pragma solidity ^0.8.17;<br>// SPDX-License-Identifier: mit<br>import &quot;./enum.sol&quot;; //可以直接引入文件<br>contract status &#123;<br>    enum state&#123;<br>        pending,<br>        shipped,<br>        accepted,<br>        rejected,<br>        canceled<br>    &#125;<br>    enum testa&#123;<br>        aaaed,<br>        bbbed,<br>        ced<br>    &#125;<br>    state public ss;<br><br>    function get() public view returns(state) &#123;<br>        return ss;<br>    &#125;<br>    function setState(state stt) public &#123;<br>        ss = stt;<br>    &#125;<br>    function cancel() public &#123;<br>        ss = state.canceled;<br>    &#125;<br>    function reset() public &#123;<br>        delete ss;//会重置为零<br>    &#125;<br>    function setStateByNum(uint index) public &#123;<br>        ss = state(index);//根据索引进行赋值<br>    &#125;<br>    function test() public returns(bool) &#123;<br>        setStateByNum(1);<br>        return (ss==state.shipped);<br>    &#125;<br><br>&#125;<br><br>//文件：enum.sol<br><br>pragma solidity ^0.8.17;<br>//SPDX-License-Identifier: MIT<br>enum _status &#123;<br>    Pending,<br>    Shipped,<br>    Accepted,<br>    Rejected,<br>    Canceled<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-02-25&quot;&gt;&lt;a href=&quot;#2023-02-25&quot; class=&quot;headerlink&quot; title=&quot;2023-02-25&quot;&gt;&lt;/a&gt;2023-02-25&lt;/h1&gt;&lt;h2 id=&quot;Enum-枚举&quot;&gt;&lt;a href=&quot;#Enum-枚举&quot; class</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>23-02-24</title>
+    <link href="https://blog.zepo.re/2023/02/24/2023-02-24.html/"/>
+    <id>https://blog.zepo.re/2023/02/24/2023-02-24.html/</id>
+    <published>2023-02-24T13:54:02.000Z</published>
+    <updated>2023-02-27T03:19:07.651Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-02-24"><a href="#2023-02-24" class="headerlink" title="2023-02-24"></a>2023-02-24</h1><h2 id="两种常量修饰符"><a href="#两种常量修饰符" class="headerlink" title="两种常量修饰符"></a>两种常量修饰符</h2><h3 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h3><p>constant修饰的变量必须要初始化，并且不可以被修改</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">contract cons &#123;<br>    address public constant addr = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc;<br>    function tryToChange() public &#123;<br>        //addr = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc;//error<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="immutable"><a href="#immutable" class="headerlink" title="immutable"></a>immutable</h3><p>immutable修饰的变量不需要初始化，同样不可以被修改但<strong>必须在构造函数中进行初始化</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pragma solidity ^0.8.17;<br>//SPDX-License-Identifier: MIT<br>contract immu &#123;<br>    address private immutable immu1 ;<br>    uint private immutable myUInt;<br>    constructor(uint uI) &#123;<br>        immu1 = msg.sender;<br>        myUInt = uI;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="getter方法必须声明为view"><a href="#getter方法必须声明为view" class="headerlink" title="getter方法必须声明为view"></a>getter方法必须声明为view</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">//SPDX-License-Identifier:MIT<br>pragma solidity ^0.8.17;<br>contract stateV &#123;<br>    uint public num;<br>    function get() public view returns(uint)&#123;<br>        return num;<br>    &#125;<br>    function set(uint n) public &#123;<br>        num = n;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="gas-与-gas-limit"><a href="#gas-与-gas-limit" class="headerlink" title="gas 与 gas limit"></a>gas 与 gas limit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pragma solidity ^0.8.17;<br>//SPDX-License-Identifier: MIT<br>contract gasAbout &#123;<br>    int public i = 0;<br>    // 花光准备的gas会导致交易失败<br>    // 状态改变会回退<br>    // gas不会退款<br>    function g() public &#123;<br>        //循环到花光所限制的gas，交易失败，i不会发生改变<br>        while(true) &#123;<br>            ++i;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>参考-&gt;<a href="https://solidity-by-example.org/gas/">Gas</a></p><h3 id="Gas"><a href="#Gas" class="headerlink" title="Gas"></a>Gas</h3><p>How much ether do you need to pay for a transaction?<br>You pay <code>gas spent</code> * <code>gas price</code> amount of ether, where</p><ul><li>gas is a unit of computation</li><li>gas spent is the total amount of gas used in a transaction</li><li>gas price is how much ether you are willing to pay per gas</li></ul><p>Transactions with higher gas price have higher priority to be included in a block.</p><p>Unspent gas will be refunded.</p><h3 id="Gas-Limit"><a href="#Gas-Limit" class="headerlink" title="Gas Limit"></a>Gas Limit</h3><p>There are 2 upper bounds to the amount of gas you can spend</p><ul><li><p>gas limit (max amount of gas you’re willing to use for your transaction, set by you)</p></li><li><p>block gas limit (max amount of gas allowed in a block, set by the network)</p></li></ul><p>试着依靠自己的理解，翻译一下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Gas<br>一个交易需要支付多少？我们需要支付的以太币为 `Gas花费数量`*`Gas单价`，其中：<br>- Gas是计算单位<br>- Gas Spent是一个交易中花费的Gas数<br>- Gas Price是你愿意为每个Gas支付的价格<br>在区块中，更高的Gas单价具有更高的优先级<br>多出的Gas会被退回<br><br>Gas Limit<br>对于我们花费gas的总数有两个上限<br>- Gas Limit（自己设置的愿意交易Gas花费最大`数量`限额）<br>- Block Gas Limit（网络设置的区块Gas花费最大`数量`限额）<br></code></pre></td></tr></table></figure><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">//SPDX-License-Identifier:MIT<br>pragma solidity ^0.8.17;<br>contract Mapping &#123;<br>    mapping(address =&gt; uint) public myMap;<br>    function get(address _addr) public view returns (uint) &#123;<br>        return myMap[_addr];<br>    &#125;<br>    function set(address _addr, uint _i) public &#123;<br>        myMap[_addr] = _i;<br>    &#125;<br>    function remove(address _addr) public  &#123;<br>        delete myMap[_addr];<br>    &#125;<br>&#125;<br>contract NestedMapping &#123;<br>    mapping(address =&gt; mapping(uint=&gt;bool)) public nested;<br>    function get(address _addr, uint _ui) public view returns(bool) &#123;<br>        return nested[_addr][_ui];<br>    &#125;<br>    function set(address _addr, uint _ui, bool _bool) public &#123;<br>        nested[_addr][_ui] = _bool;<br>    &#125;<br>    function remove(address _addr, uint _ui) public &#123;<br>        delete nested[_addr][_ui];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pragma solidity ^0.8.17;<br>//SPDX-License-Identifier: UNLICENSED<br>contract Array &#123;<br>    uint[] public arr ;<br>    uint[] public arr2 = [1, 2, 3];<br>    uint[10] public arr3;<br>    function get(uint i) public view returns (uint)&#123;<br>        return arr[i];<br>    &#125;<br>    function getArr() public view returns (uint[] memory) &#123;<br>        return arr;<br>    &#125;<br>    function push(uint i) public &#123;<br>        arr.push(i);<br>    &#125;<br>    function pop()public &#123;<br>    //pop会相应减少长度<br>        arr.pop();<br>    &#125;<br>    function getLength() public view returns(uint)&#123;<br>        return arr.length;<br>    &#125;<br>    function remove(uint index) public &#123;<br>    //delete只删除相应索引上的值<br>        delete arr[index];<br>    &#125;<br>    function examples() external &#123;<br>        uint[] memory a = new uint[](5);//只能生成固定长度<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure><h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>与Java不同的是，solidity没有现成方法来调用进行删除某一索引上的元素，比如自行定义函数</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">方法一（能保留原有顺序）：<br>pragma solidity ^0.8.17;<br>// SPDX-License-Identifier: MIT<br>contract arrShift1 &#123;<br>uint[] public arr;<br>function remove(uint _index) public &#123;<br>require(_index &lt; arr.length, &quot;index out of bound&quot;);<br>for(uint i = _index; i &lt; arr.length-1; i++) &#123;<br>arr[i] = arr[i+1];<br>&#125;<br>arr.pop();<br>//自要删除的元素起，后面每一元素覆盖前面，然后删除最后的值<br>&#125;<br>function test() external &#123;<br>arr = [1,2,3,4,5];<br>remove(2);<br>assert(arr[0] == 1);<br>assert(arr[1] == 2);<br>assert(arr[2] == 4);<br>assert(arr[3] == 5);<br>assert(arr.length == 4);<br><br>        arr = [1];<br>        remove(0);<br>        assert(arr.length == 0);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">方法二（简单粗暴，直接替换）：<br>pragma solidity ^0.8.17;<br>//SPDX-License-Identifier:mit<br>contract arrReplace &#123;<br>    uint[] public arr;<br>    function arrRepl(uint _index) public &#123;<br>        arr[_index] = arr[arr.length-1];<br>        arr.pop();<br>    &#125;<br>    function test() public&#123;<br>        arr = [1,2,3,4,5];<br>        arrRepl(2);<br>        assert(arr[0]==1);<br>        assert(arr[1]==2);<br>        assert(arr[2]==5);<br>        assert(arr[3]==4);<br>        assert(arr.length==4);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-02-24&quot;&gt;&lt;a href=&quot;#2023-02-24&quot; class=&quot;headerlink&quot; title=&quot;2023-02-24&quot;&gt;&lt;/a&gt;2023-02-24&lt;/h1&gt;&lt;h2 id=&quot;两种常量修饰符&quot;&gt;&lt;a href=&quot;#两种常量修饰符&quot; class</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>23-02-23</title>
+    <link href="https://blog.zepo.re/2023/02/23/2023-02-23.html/"/>
+    <id>https://blog.zepo.re/2023/02/23/2023-02-23.html/</id>
+    <published>2023-02-23T13:54:02.000Z</published>
+    <updated>2023-02-27T03:19:07.625Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-02-23"><a href="#2023-02-23" class="headerlink" title="2023-02-23"></a>2023-02-23</h1><h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ul><li><p><a href="https://www.youtube.com/watch?v=RQzuQb0dfBM">Youtube - 二十分钟学习solidity</a></p></li><li><p><a href="https://solidity-by-example.org/">Solidity例子练习</a></p></li></ul><h2 id="自定义修饰符"><a href="#自定义修饰符" class="headerlink" title="自定义修饰符"></a>自定义修饰符</h2><p>定义一个自定义修饰符，使用 modifier 关键字，然后在花括号内编写对应的逻辑，例如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">modifier onlyOwner() &#123;<br>    require(msg.sender == owner, &quot;Only owner can execute this function&quot;);<br>    _; // 占位符<br>&#125;<br><br>function withdraw(uint amount) public onlyOwner &#123;<br>    // 只有 owner 能够调用这个函数<br>    // 执行提现逻辑<br>&#125;<br><br></code></pre></td></tr></table></figure><p>在这个实现中，我们使用 require 函数来检查当前交易的发送者地址是否与合约的拥有者地址相等，如果不相等，则会抛出一个错误信息并终止操作。如果相等，则会继续执行原来的操作。</p><h2 id="货币单位"><a href="#货币单位" class="headerlink" title="货币单位"></a>货币单位</h2><p><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202302271029168.png"></p><ul><li>1 wei &#x3D;&#x3D; 1</li><li>1 gwei &#x3D;&#x3D; 1*10^9</li><li>1 ether &#x3D;&#x3D; 1*10^18</li></ul><p>！注意：数值与单位之间要用空格隔开</p><h2 id="字节数组"><a href="#字节数组" class="headerlink" title="字节数组"></a>字节数组</h2><p>有个概念要记一下：? 字（word）与字节（byte）、位（bit） ?：一个字节有8位，常见的例子有一个电脑多少位，它的字就有多少位</p><p>32位计算机：1字&#x3D;32位&#x3D;4字节，64位计算机：1字&#x3D;64位&#x3D;8字节</p><h3 id="bytes——动态版"><a href="#bytes——动态版" class="headerlink" title="bytes——动态版"></a>bytes——动态版</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">bytes bb;<br>    function bt() public &#123;<br>        bb.push(0x11);<br>        bb.push(0x12);<br>        bb.push(0x44);<br>    &#125;<br></code></pre></td></tr></table></figure><h3 id="bytesX——固定版"><a href="#bytesX——固定版" class="headerlink" title="bytesX——固定版"></a>bytesX——固定版</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">以太坊虚拟机是256位的，一个字就是256位那么X为多少就表示需要多少字，然后转换成十六进制<br>bytes1 byt1 = 0x11;<br>bytes2 byt2 = 0x2222;<br>bytes3 byt3 = 0x333333;<br>bytes4 byt4 = 0xFFFFFFFF;//最大<br>bytes1 bytMIN = 0x00;<br>···<br></code></pre></td></tr></table></figure><h3 id="一个神奇的案例"><a href="#一个神奇的案例" class="headerlink" title="一个神奇的案例"></a>一个神奇的案例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">contract byt &#123;<br>    bytes2 sm = 0x5b33;<br>    function plus256 public returns(bytes3) &#123;<br>        return sm;//returns 0x5b3300<br>    &#125;<br>    function isPlus256 public returns(bool) &#123;<br>        return 0x5b0000/(256*256) == sm;<br>    &#125;<br>    function plus256 public returns(bytes2) &#123;<br>        return sm;//error<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="uint跟int的极限"><a href="#uint跟int的极限" class="headerlink" title="uint跟int的极限"></a>uint跟int的极限</h2><p>代码：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">int minInt = type(int).min;<br>int maxInt = type(int).max;<br>uint minU = type(uint).min;<br>uint maxU = type(uint).max;<br></code></pre></td></tr></table></figure><p>输出结果</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202302271029169.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-02-23&quot;&gt;&lt;a href=&quot;#2023-02-23&quot; class=&quot;headerlink&quot; title=&quot;2023-02-23&quot;&gt;&lt;/a&gt;2023-02-23&lt;/h1&gt;&lt;h2 id=&quot;学习资源&quot;&gt;&lt;a href=&quot;#学习资源&quot; class=&quot;head</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
   
   <entry>
     <title>23-02-22</title>
