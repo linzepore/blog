@@ -6,7 +6,7 @@
   <link href="https://blog.zepo.re/atom.xml" rel="self"/>
   
   <link href="https://blog.zepo.re/"/>
-  <updated>2023-03-01T00:33:58.571Z</updated>
+  <updated>2023-03-01T01:46:47.446Z</updated>
   <id>https://blog.zepo.re/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>23-03-01</title>
+    <link href="https://blog.zepo.re/2023/03/01/2023-03-01.html/"/>
+    <id>https://blog.zepo.re/2023/03/01/2023-03-01.html/</id>
+    <published>2023-03-01T00:29:02.000Z</published>
+    <updated>2023-03-01T01:46:47.446Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023-03-01"><a href="#2023-03-01" class="headerlink" title="2023-03-01"></a>2023-03-01</h1><h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">// SPDX-License-Identifier: MIT<br>pragma solidity ^0.8.17;<br><br>/* Graph of inheritance<br>    A<br>   / \<br>  B   C<br> / \ /<br>F  D,E<br><br>*/<br>contract A &#123;<br>    //需要被重写的函数加上virtual修饰符<br>    function foo() public pure virtual returns(string memory) &#123;<br>        return &quot;A&quot;;<br>    &#125;<br>&#125;<br>contract B is A&#123;<br>    function foo() public pure override virtual returns (string memory) &#123;<br>        return &quot;B&quot;;<br>    &#125;<br>&#125;<br>contract C is A &#123;<br>    function foo() public pure override virtual returns (string memory) &#123;<br>        return &quot;C&quot;;<br>    &#125;<br>&#125;<br><br>// Contracts can inherit from multiple parent contracts.<br>// When a function is called that is defined multiple times in<br>// different contracts, parent contracts are searched from<br>// right to left, and in depth-first manner.<br>//合同可以多重继承<br>//在不同合约中当函数被定义为多重继承时，父合约会自右向左，按照深度优先搜索<br><br><br>contract D is B, C &#123;<br>    //多继承时候需要给override传入重写合约<br>    function foo() public pure override(B, C)  returns (string memory) &#123;<br>        return super.foo();//返回“C”<br>    &#125;<br>&#125;<br>contract E is C,B &#123;<br>    function foo() public pure override(C, B)  returns (string memory) &#123;<br>        return super.foo();//返回“B”<br>    &#125;<br>&#125;<br>contract F is A, B &#123;<br>        //必须把父合同放前面（A是B的父合同）<br>        //此时是孙子合同<br>        //调换A跟B会发生编译错误<br>    function foo() public pure override(B, A) returns (string memory) &#123;<br>        return super.foo();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>不能够调转继承合同的父子顺序</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303010937016.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023-03-01&quot;&gt;&lt;a href=&quot;#2023-03-01&quot; class=&quot;headerlink&quot; title=&quot;2023-03-01&quot;&gt;&lt;/a&gt;2023-03-01&lt;/h1&gt;&lt;h2 id=&quot;多继承&quot;&gt;&lt;a href=&quot;#多继承&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
   
   <entry>
     <title>23-02-28</title>
