@@ -6,7 +6,7 @@
   <link href="https://blog.zepo.re/atom.xml" rel="self"/>
   
   <link href="https://blog.zepo.re/"/>
-  <updated>2023-03-01T14:15:12.511Z</updated>
+  <updated>2023-03-02T01:21:28.839Z</updated>
   <id>https://blog.zepo.re/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>23-03-02</title>
+    <link href="https://blog.zepo.re/2023/03/02/2023-03-02.html/"/>
+    <id>https://blog.zepo.re/2023/03/02/2023-03-02.html/</id>
+    <published>2023-03-02T01:21:52.000Z</published>
+    <updated>2023-03-02T01:21:28.839Z</updated>
+    
+    
+    
+    
+    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
+    
+    <category term="Solidity" scheme="https://blog.zepo.re/categories/Learning/Solidity/"/>
+    
+    <category term="Blockchain" scheme="https://blog.zepo.re/categories/Learning/Blockchain/"/>
+    
+    <category term="Competition" scheme="https://blog.zepo.re/categories/Competition/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
+    
+    <category term="blockchain" scheme="https://blog.zepo.re/tags/blockchain/"/>
+    
+    <category term="solidity" scheme="https://blog.zepo.re/tags/solidity/"/>
+    
+  </entry>
   
   <entry>
     <title>23-03-01</title>
