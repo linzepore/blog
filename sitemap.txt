@@ -15,7 +15,13 @@ https://blog.zepo.re/tags/tech/
 https://blog.zepo.re/tags/learning/
 https://blog.zepo.re/tags/blockchain/
 https://blog.zepo.re/tags/solidity/
+https://blog.zepo.re/tags/teach/
+https://blog.zepo.re/tags/GDIP/
 https://blog.zepo.re/categories/Learning/
 https://blog.zepo.re/categories/Learning/Solidity/
 https://blog.zepo.re/categories/Learning/Blockchain/
 https://blog.zepo.re/categories/Competition/
+https://blog.zepo.re/categories/Teaching/
+https://blog.zepo.re/categories/Teaching/HTML/
+https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/
+https://blog.zepo.re/categories/GDIP/
