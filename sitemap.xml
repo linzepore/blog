@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.zepo.re/2023/03/06/2023-03-06.html/</loc>
+    
+    <lastmod>2023-03-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.zepo.re/2023/03/05/2023-03-05.html/</loc>
     
     <lastmod>2023-03-05</lastmod>
@@ -130,7 +139,7 @@
 
   <url>
     <loc>https://blog.zepo.re/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -138,42 +147,42 @@
   
   <url>
     <loc>https://blog.zepo.re/tags/tech/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/learning/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/blockchain/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/solidity/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/teach/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/GDIP/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -182,56 +191,56 @@
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Solidity/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Blockchain/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Competition/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/HTML/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/GDIP/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
