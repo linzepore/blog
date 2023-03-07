@@ -1,3 +1,4 @@
+https://blog.zepo.re/2023/03/07/2023-03-07.html/
 https://blog.zepo.re/2023/03/06/2023-03-06.html/
 https://blog.zepo.re/2023/03/05/2023-03-05.html/
 https://blog.zepo.re/2023/03/04/2023-03-04.html/
@@ -20,6 +21,7 @@ https://blog.zepo.re/tags/blockchain/
 https://blog.zepo.re/tags/solidity/
 https://blog.zepo.re/tags/teach/
 https://blog.zepo.re/tags/GDIP/
+https://blog.zepo.re/tags/fisco/
 https://blog.zepo.re/categories/Learning/
 https://blog.zepo.re/categories/Learning/Solidity/
 https://blog.zepo.re/categories/Learning/Blockchain/
@@ -28,3 +30,4 @@ https://blog.zepo.re/categories/Teaching/
 https://blog.zepo.re/categories/Teaching/HTML/
 https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/
 https://blog.zepo.re/categories/GDIP/
+https://blog.zepo.re/categories/Learning/Fisco/
