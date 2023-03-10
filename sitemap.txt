@@ -32,3 +32,4 @@ https://blog.zepo.re/categories/Teaching/HTML/
 https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/
 https://blog.zepo.re/categories/GDIP/
 https://blog.zepo.re/categories/Learning/Fisco/
+https://blog.zepo.re/categories/Teaching/vm/
