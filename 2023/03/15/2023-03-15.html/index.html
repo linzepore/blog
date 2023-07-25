@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>23-03-15 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>23-03-15</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2023-03-15T11:56:23.000Z" id="date"> 2023-03-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2023-03-15T13:07:10.841Z" id="updated"> 2023-03-15</time></div></span></div></div><hr><div id="post-content"><h1 id="2023-03-15-Spring中出现的一些错误"><a href="#2023-03-15-Spring中出现的一些错误" class="headerlink" title="2023-03-15 | Spring中出现的一些错误"></a>2023-03-15 | Spring中出现的一些错误</h1><h2 id="没有数组却出现数组越界"><a href="#没有数组却出现数组越界" class="headerlink" title="没有数组却出现数组越界"></a>没有数组却出现数组越界</h2><p>如图，有两个简单的实体类：User的属性包含了一个<code>List&lt;Address&gt;</code>类型<br><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303152002745.png"></p>
+<p>一个典型的一对多的关系<br><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303152005761.png"></p>
+<p>业务上简单地查找用户信息<br><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303152006350.png"></p>
+<p>运行的时候出现了数组越界的错误<br><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303152008977.png"></p>
+<blockquote>
+<p>原因：User类没有无参构造函数</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303152008267.png"></p>
+<h2 id="Provider传不传参数的区别"><a href="#Provider传不传参数的区别" class="headerlink" title="Provider传不传参数的区别"></a>Provider传不传参数的区别</h2><blockquote>
+<p>如果不传参数的话，没有作判断的可能性，就会出现值缺失的时候，向表中列传入空值</p>
+</blockquote>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2023/03/17/2023-03-17.html/">← Next Vue2 - 23-03-17</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2023/03/11/2023-03-11.html/">23-03-11 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2023-03-15-Spring%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF"><span class="toc-number">1.</span> <span class="toc-text">2023-03-15 | Spring中出现的一些错误</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E6%95%B0%E7%BB%84%E5%8D%B4%E5%87%BA%E7%8E%B0%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C"><span class="toc-number">1.1.</span> <span class="toc-text">没有数组却出现数组越界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Provider%E4%BC%A0%E4%B8%8D%E4%BC%A0%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">Provider传不传参数的区别</span></a></li></ol></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
