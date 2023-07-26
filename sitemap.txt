@@ -1,3 +1,4 @@
+https://blog.zepo.re/2023/07/20/%E5%8E%A6%E9%97%A8%E5%A5%BD%E7%8E%A9%E5%90%97.html/
 https://blog.zepo.re/2023/07/20/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html/
 https://blog.zepo.re/2023/02/19/hello-world.html/
 https://blog.zepo.re/2023/03/30/Vue%E8%A7%86%E9%A2%91%E8%80%81%E5%B8%88%E7%AC%94%E8%AE%B0.html/
@@ -54,6 +55,8 @@ https://blog.zepo.re/tags/uCharts/
 https://blog.zepo.re/tags/Vue3/
 https://blog.zepo.re/tags/teach/
 https://blog.zepo.re/tags/SSM/
+https://blog.zepo.re/tags/life/
+https://blog.zepo.re/tags/XiaMen/
 https://blog.zepo.re/categories/Learning/
 https://blog.zepo.re/categories/Learning/Solidity/
 https://blog.zepo.re/categories/Learning/Blockchain/
@@ -73,3 +76,5 @@ https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/
 https://blog.zepo.re/categories/GDIP/
 https://blog.zepo.re/categories/SSM/
 https://blog.zepo.re/categories/SSM/Spring/
+https://blog.zepo.re/categories/Life/
+https://blog.zepo.re/categories/Life/XiaMen/
