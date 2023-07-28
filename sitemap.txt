@@ -58,6 +58,7 @@ https://blog.zepo.re/tags/teach/
 https://blog.zepo.re/tags/SSM/
 https://blog.zepo.re/tags/life/
 https://blog.zepo.re/tags/XiaMen/
+https://blog.zepo.re/tags/movie/
 https://blog.zepo.re/categories/Learning/
 https://blog.zepo.re/categories/Learning/Solidity/
 https://blog.zepo.re/categories/Learning/Blockchain/
@@ -79,3 +80,4 @@ https://blog.zepo.re/categories/SSM/
 https://blog.zepo.re/categories/SSM/Spring/
 https://blog.zepo.re/categories/Life/
 https://blog.zepo.re/categories/Life/XiaMen/
+https://blog.zepo.re/categories/Life/Movie/

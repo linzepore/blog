@@ -511,6 +511,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.zepo.re/tags/movie/</loc>
+    <lastmod>2023-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -655,6 +662,13 @@
   
   <url>
     <loc>https://blog.zepo.re/categories/Life/XiaMen/</loc>
+    <lastmod>2023-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Life/Movie/</loc>
     <lastmod>2023-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
