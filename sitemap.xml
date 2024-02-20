@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.zepo.re/2024/02/19/Spring%20Boot%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html/</loc>
+    
+    <lastmod>2024-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.zepo.re/2023/08/31/nginx-issuse.html/</loc>
     
     <lastmod>2023-08-31</lastmod>
@@ -409,7 +418,7 @@
 
   <url>
     <loc>https://blog.zepo.re/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -417,119 +426,126 @@
   
   <url>
     <loc>https://blog.zepo.re/tags/tech/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/learning/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/blockchain/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/solidity/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/fisco/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/Spring-Framework/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/GDIP/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/Vue2/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/uni-app/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/uCharts/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/Vue3/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/teach/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/SSM/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/life/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/XiaMen/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/movie/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/tags/nginx/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/tags/%E5%AE%9E%E4%B9%A0/</loc>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -538,168 +554,182 @@
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Solidity/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Blockchain/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Fisco/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Fisco-Bcos/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Spring-Framework/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Vue2/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Competition/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/uni-app/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/uCharts/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/solidity/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Learning/Vue3/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/HTML/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/vm/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Teaching/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/GDIP/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/SSM/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/SSM/Spring/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Life/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Life/XiaMen/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Life/Movie/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Debug/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.zepo.re/categories/Debug/Nginx/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2024-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/Teaching/SpringBoot/</loc>
+    <lastmod>2024-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zepo.re/categories/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2024-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
