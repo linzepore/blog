@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>2月26日工作内容 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>2月26日工作内容</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-02-27T01:22:22.000Z" id="date"> 2024-02-27</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-02-27T01:23:15.454Z" id="updated"> 2024-02-27</time></div></span></div></div><hr><div id="post-content"><h1 id="2月26日工作内容"><a href="#2月26日工作内容" class="headerlink" title="2月26日工作内容"></a>2月26日工作内容</h1><h2 id="配置代码文档模板"><a href="#配置代码文档模板" class="headerlink" title="配置代码文档模板"></a>配置代码文档模板</h2><ol>
+<li><p>实现创建新类时候自动添加注释：</p>
+<p>设置里面加入以下内容，位置如图：</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml">/**<br> * @description: TODO <br> * @author $&#123;USER&#125;<br> * @date $&#123;DATE&#125; $&#123;TIME&#125;<br> * @version 1.0<br> */<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240226133913906.png" alt="image-20240226133913906"></p>
+<ol start="2">
+<li><p>可以手动在旧代码基础上生成注释，按照顺序添加模板组合</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240226142018905.png"></p>
+<p>在模板组合填充模板信息（上图步骤5），然后编辑模板当中引用的变量（上图步骤6）</p>
+<p>其中，模板信息及相应变量如下：</p>
+<ul>
+<li><p>方法注释(*)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">** <br> * @description: $description$ <br> * @param: $params$ <br> * @return: $returns$ <br> * @author $USER$<br> * @date: $date$ $time$<br> */ <br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240226142716694.png" alt="image-20240226142716694"></p>
+<ul>
+<li><p><code>params</code>: <code>groovyScript(&quot;def result=&#39;&#39;; def params=\&quot;$&#123;_1&#125;\&quot;.replaceAll(&#39;[\\\\[|\\\\]|\\\\s]&#39;, &#39;&#39;).split(&#39;,&#39;).toList(); for(i = 0; i &lt; params.size(); i++) &#123;result+=&#39;&#39; + params[i] + ((i &lt; params.size() - 1) ? &#39;\\n&#39;:&#39;&#39;)&#125;; return result&quot;, methodParameters()) </code></p>
+</li>
+<li><p><code>returns</code>: <code>methodReturn Type()</code></p>
+</li>
+<li><p><code>USER</code>: <code>user()</code></p>
+</li>
+<li><p><code>date</code>: <code>date</code></p>
+</li>
+<li><p><code>time</code>: <code>time()</code></p>
+</li>
+</ul>
+</li>
+<li><p>类注释(**)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">**<br> * @description: TODO<br> * @author $user$<br> * @date $date$ $time$<br> * @version 1.0<br> */<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240226143242256.png" alt="image-20240226143242256"></p>
+<ul>
+<li><p><code>user</code>: <code>user()</code></p>
+</li>
+<li><p><code>date</code>: <code>date</code></p>
+</li>
+<li><p><code>time</code>: <code>time()</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="解决一个客户提出的空表常见问题"><a href="#解决一个客户提出的空表常见问题" class="headerlink" title="解决一个客户提出的空表常见问题"></a>解决一个客户提出的空表常见问题</h2><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240226171904411.png" alt="image-20240226171904411"></p>
+<p>干这行总会遇到客户提出的奇奇怪怪的需求，这个客户在系统刚初始化的时候表里还没有数据，员工业绩没显示出来，就提出一个需求：业绩排行榜要能看到每个人</p>
+<p>经过多次调试SQL语句，发现问题是出在表中初始的时候是空数据，where语句会导致查询结果直接为空</p>
+<p>我的解决方式：</p>
+<p>针对业绩排行榜没有显示每一个人的问题，放宽了SQL查询条件，原本为空的时候会因为where语句限制而查询不到，现加入 IS NULL，跟左连接、COALESCE一起配合使用，达到查询不到的时候就显示为0的效果，脱敏SQL如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><br>    admin_user_info.admin_id,<br>    admin_user_info.name <span class="hljs-keyword">AS</span> admin_name,<br>    <span class="hljs-built_in">COALESCE</span>(<span class="hljs-built_in">SUM</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> client_under_review.del_flag <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> net_income <span class="hljs-keyword">ELSE</span> <span class="hljs-number">0</span> <span class="hljs-keyword">END</span>), <span class="hljs-number">0</span>) <span class="hljs-keyword">AS</span> total_net_income<br><span class="hljs-keyword">FROM</span> admin_user_info<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> client_under_review <span class="hljs-keyword">ON</span> client_under_review.admin_id <span class="hljs-operator">=</span> admin_user_info.admin_id<br><span class="hljs-keyword">WHERE</span><br>    (client_under_review.del_flag <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">OR</span> client_under_review.del_flag <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>)<br>		<span class="hljs-keyword">AND</span> admin_user.del_flag <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>    <span class="hljs-keyword">AND</span> (client_under_review.xxx_date <span class="hljs-keyword">BETWEEN</span> <span class="hljs-string">&#x27;2024-02-01&#x27;</span> <span class="hljs-keyword">AND</span> <span class="hljs-string">&#x27;2024-02-31&#x27;</span> <span class="hljs-keyword">OR</span> client_under_review.xxx_date <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>)<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> admin_user_info.admin_id, admin_user_info.name, admin_user_info.create_time<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-built_in">COALESCE</span>(<span class="hljs-built_in">SUM</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> client_under_review.del_flag <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> client_under_review.net_income <span class="hljs-keyword">ELSE</span> <span class="hljs-number">0</span> <span class="hljs-keyword">END</span>), <span class="hljs-number">0</span>) <span class="hljs-keyword">DESC</span><br></code></pre></td></tr></table></figure>
+
+
+
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/02/24/2%E6%9C%8822-23%E6%97%A5%E5%B7%A5%E4%BD%9C%E6%83%85%E5%86%B5.html/">2月22-23日工作情况 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E6%9C%8826%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">2月26日工作内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%A0%81%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.1.</span> <span class="toc-text">配置代码文档模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E4%B8%80%E4%B8%AA%E5%AE%A2%E6%88%B7%E6%8F%90%E5%87%BA%E7%9A%84%E7%A9%BA%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">解决一个客户提出的空表常见问题</span></a></li></ol></li></ol></div></div><footer><nobr><span class="text-title">ICP</span><a class="text-content" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备19120384号-2</a></nobr><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
