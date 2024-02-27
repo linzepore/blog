@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://blog.zepo.re/2024/02/19/Spring%20Boot%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html/</loc>
+    
+    <lastmod>2024-02-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.zepo.re/2024/02/24/2%E6%9C%8822-23%E6%97%A5%E5%B7%A5%E4%BD%9C%E6%83%85%E5%86%B5.html/</loc>
     
     <lastmod>2024-02-27</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://blog.zepo.re/2024/02/27/2%E6%9C%8826%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/</loc>
     
     <lastmod>2024-02-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zepo.re/2024/02/19/Spring%20Boot%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html/</loc>
-    
-    <lastmod>2024-02-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -748,21 +748,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zepo.re/categories/Teaching/SpringBoot/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.zepo.re/categories/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zepo.re/categories/Learning/SpringBoot/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
