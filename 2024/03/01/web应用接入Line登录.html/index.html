@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Web应用接入Line登录 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Web应用接入Line登录</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-03-01T10:21:22.000Z" id="date"> 2024-03-01</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-03-01T10:22:08.969Z" id="updated"> 2024-03-01</time></div></span></div></div><hr><div id="post-content"><h1 id="Web应用接入Line登录"><a href="#Web应用接入Line登录" class="headerlink" title="Web应用接入Line登录"></a>Web应用接入Line登录</h1><p>台湾客户要求在原App的基础上接入Line登录，接入第三方登录的需求工作至今是第一次遇到（毕竟现在手上负责的两个项目都是维护阶段），好在除了登录之后业务的处理之外，登录问题顺利解决了。</p>
+<p>接到需求的我第一时间找的是现成的技术分享，但好像比较少，最终我还是选择一点点啃官方的纯英文文档：<a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-login/getting-started/%E5%92%8Chttps://developers.line.biz/en/docs/line-login/integrate-line-login/">https://developers.line.biz/en/docs/line-login/getting-started/和https://developers.line.biz/en/docs/line-login/integrate-line-login/</a></p>
+<p>博主身在内地，所以这篇博文，是博主在内地接入Line的文档实践。</p>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>开始之前有些特殊的名字术语解释如下，我就不翻译了，尽可能保持原汁原味：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirement</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LINE account</td>
+<td align="left">An account for the LINE app. You need a LINE account to try out the starter app. To create a LINE account, <a target="_blank" rel="noopener" href="https://line.me/">download (opens new window)</a>LINE for iOS or LINE for Android and sign up. For more information about creating a new LINE account, see <a target="_blank" rel="noopener" href="https://guide.line.me/ja/signup-and-migration/line-signup.html">Create a new account (opens new window)</a>(only available in Japanese) in the LINE user’s guide.</td>
+</tr>
+<tr>
+<td align="left">Provider</td>
+<td align="left">Provider is a concept that describes the person or organization that provides the application. Create a provider on the <a target="_blank" rel="noopener" href="https://developers.line.biz/console/">LINE Developers Console</a>. A LINE user has a different user ID for each provider.</td>
+</tr>
+<tr>
+<td align="left">LINE Login channel</td>
+<td align="left">A channel forms the connection between your app and the LINE Platform. Create a channel within the provider. You need to create a channel for each app. Create a LINE Login channel on the <a target="_blank" rel="noopener" href="https://developers.line.biz/console/register/line-login/channel/">LINE Developers Console</a>. <br />Notes:<br />- If you’ve never logged in to the LINE Developers Console, you’ll be asked to register as a developer first.<br />– The steps for creating your LINE Login channel are explained in <a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-login/getting-started/#step-1-create-channel">Step 1: Create your LINE Login channel</a>.<br />- When creating a LINE Login channel to use a starter app, makes sure you select <strong>Web app</strong> under <strong>App types</strong>.</td>
+</tr>
+<tr>
+<td align="left">Heroku account</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.heroku.com/">Heroku (opens new window)</a>is a service that offers hosting for web apps. Deploying the starter app to Heroku means you don’t need your own server.</td>
+</tr>
+<tr>
+<td align="left">Heroku CLI</td>
+<td align="left">The <a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/heroku-cli">Heroku Command Line Interface (CLI) (opens new window)</a>is necessary for using certain Heroku functions.</td>
+</tr>
+</tbody></table>
+<p>就着我对文档的理解，我小小提一嘴：实际使用的时候Channel是最小单位，openId是用户在Channel唯一标识，在不同Channel当中同一个用户的openId是不同的。</p>
+<h2 id="步骤一：创建Line-Login-Channel"><a href="#步骤一：创建Line-Login-Channel" class="headerlink" title="步骤一：创建Line Login Channel"></a>步骤一：创建Line Login Channel</h2><p><a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-developers-console/overview/#channel">Channel</a>是应用程序与 LINE 平台连接的通道，第一步要做的就是在<a target="_blank" rel="noopener" href="https://developers.line.biz/console/register/line-login/channel/">控制台</a>为Web Apps创建Channel。</p>
+<ol>
+<li><p>登录<a target="_blank" rel="noopener" href="https://developers.line.biz/console/">Line开发者控制台</a></p>
+</li>
+<li><p>选择一个Provider，并选择在<strong>Channels</strong> 选项中选择<strong>LINE Login</strong></p>
+</li>
+<li><p>填入必填的信息，信息的解释如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Required?</th>
+<th align="left">Description</th>
+<th align="left">Location displayed to users</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Channel type</strong></td>
+<td align="left">✅</td>
+<td align="left">The channel type. Select LINE Login to create your LINE Login Channel.</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left"><strong>Provider</strong></td>
+<td align="left">✅</td>
+<td align="left">The channel’s <a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-developers-console/overview/#provider">provider</a></td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>Region to provide the service</strong></td>
+<td align="left">✅</td>
+<td align="left">The region you want to provide your LINE Login service. One of: JapanThailandTaiwanIndonesia*If you want to provide your service in multiple regions, create a channel for each region.</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left"><strong>Company or owner’s country or region</strong></td>
+<td align="left">✅</td>
+<td align="left">Country or region of the company or owner that manage the channel</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel icon</strong></td>
+<td align="left">❌</td>
+<td align="left">The channel’s icon</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel name</strong></td>
+<td align="left">✅</td>
+<td align="left">The channel’s name *Channel name can’t contain “LINE” or similar strings.</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel description</strong></td>
+<td align="left">✅</td>
+<td align="left">The channel’s description</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>App types</strong></td>
+<td align="left">✅</td>
+<td align="left">The type of app you plan to integrate LINE Login with. One of: Web appMobile app*In the example of deploying a starter app, select <strong>Web app</strong>.</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left"><strong>Email address</strong></td>
+<td align="left">✅</td>
+<td align="left">Email address to receive important updates about the channel</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left"><strong>Privacy policy URL</strong></td>
+<td align="left">See description</td>
+<td align="left">The URL of the app’s privacy policy. Required if your provider is a <a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-developers-console/overview/#certified-provider">certified provider</a>.</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>Terms of use URL</strong></td>
+<td align="left">❌</td>
+<td align="left">The URL of the app’s terms of use</td>
+<td align="left">Permission consent screen when launching LINE Login or LIFF App</td>
+</tr>
+<tr>
+<td align="left"><strong>LINE Developers Agreement</strong></td>
+<td align="left">✅</td>
+<td align="left">Read and agree to the <a target="_blank" rel="noopener" href="https://terms2.line.me/LINE_Developers_Agreement?lang=en">LINE Developers Agreement (opens new window)</a>.</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left"><strong>LY Corporation Privacy Policy</strong></td>
+<td align="left">See description</td>
+<td align="left">Required only if you’ve selected Thailand as <strong>Region to provide the service</strong>. Read and acknowledge <a target="_blank" rel="noopener" href="https://line.me/th/terms/policy/">LY Corporation Privacy Policy (opens new window)</a>.</td>
+<td align="left">-</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>这一步的一些注意事项我截取原文放下来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301170843885.png" alt="image-20240301170843885"></p>
+<h2 id="步骤二：部署starter应用"><a href="#步骤二：部署starter应用" class="headerlink" title="步骤二：部署starter应用"></a>步骤二：部署starter应用</h2><p>接下来通过配置在第一步创建Channel的时候生成的channel ID和channel secret，就可以部署demo程序了</p>
+<ol>
+<li>git克隆以下任一项目，第二个比较方便</li>
+</ol>
+<ul>
+<li><p>官方的仓库：<a target="_blank" rel="noopener" href="https://github.com/line/line-login-starter%EF%BC%8C%E5%8F%AF%E8%83%BD%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%B7%91%E8%B5%B7%E6%9D%A5">https://github.com/line/line-login-starter，可能不能直接跑起来</a></p>
+</li>
+<li><p>我调了之后可以正常跑了，并且也增加了打包成为.zip文件的配置方便部署服务器，只要修改好ymal文件里面的三个关键信息、换上本地代理软件http端口就行：<a target="_blank" rel="noopener" href="https://github.com/linzepore/line-login-starter-zepore">https://github.com/linzepore/line-login-starter-zepore</a></p>
+</li>
+</ul>
+<ol start="2">
+<li>在<code>application.yml</code>中填入第一步创建Channel的时候生成的channel ID和channel secret</li>
+<li>修改<code>com.linecorp.sample.login.infra.http.Client</code>中的http代理端口（V2RayN的是10809）</li>
+</ol>
+<p>关于Java程序设置代理，可以看看这篇文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liangzai-cool/p/6291384.html">Java配置代理</a></p>
+<h2 id="步骤三：检查Channel设置，并填入回调地址"><a href="#步骤三：检查Channel设置，并填入回调地址" class="headerlink" title="步骤三：检查Channel设置，并填入回调地址"></a>步骤三：检查Channel设置，并填入回调地址</h2><ol>
+<li>进入第一步创建的Channel</li>
+<li>点击<code>Basic setting</code>选项，<code>App types</code>一行勾上<code>Web app</code></li>
+<li>点击<code>LINE Login</code>选项，填入回调地址（跟<code>application.yml</code>保持一致）</li>
+</ol>
+<p>在demo程序中<code>/auth</code>Controller就是回调用的，同时也要在<code>application.yml</code>中进行配置</p>
+<p>控制台中<code>Basic setting</code>选项的信息解释如下</p>
+<p>The <strong>Basic settings</strong> tab contains basic information about your channel. Here’s the information you’ll find:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Channel ID</strong></td>
+<td align="left">Unique identifier for the channel</td>
+</tr>
+<tr>
+<td align="left"><strong>Region to provide the service</strong></td>
+<td align="left">The region you want to provide your LINE Login service. You can only set the region when creating a new channel.</td>
+</tr>
+<tr>
+<td align="left"><strong>Company or owner’s country or region</strong></td>
+<td align="left">Country or region of the company or owner that manage the channel</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel icon</strong></td>
+<td align="left">The channel’s icon</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel name</strong></td>
+<td align="left">The channel’s name</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel description</strong></td>
+<td align="left">The channel’s description</td>
+</tr>
+<tr>
+<td align="left"><strong>Email address</strong></td>
+<td align="left">Email address to receive important updates about the channel</td>
+</tr>
+<tr>
+<td align="left"><strong>Privacy policy URL</strong></td>
+<td align="left">The URL of the app’s privacy policy</td>
+</tr>
+<tr>
+<td align="left"><strong>Terms of use URL</strong></td>
+<td align="left">The URL of the app’s terms of use</td>
+</tr>
+<tr>
+<td align="left"><strong>App types</strong></td>
+<td align="left">The type of app you plan to integrate LINE Login with</td>
+</tr>
+<tr>
+<td align="left"><strong>Permissions</strong></td>
+<td align="left">The type of user data this channel can access</td>
+</tr>
+<tr>
+<td align="left"><strong>Channel secret</strong></td>
+<td align="left">A unique secret key you can use to grant an app access to your channel</td>
+</tr>
+<tr>
+<td align="left"><strong>Assertion Signing Key</strong></td>
+<td align="left">The UUIDs associated with your assertion signing key pair</td>
+</tr>
+<tr>
+<td align="left"><strong>Your user ID</strong></td>
+<td align="left">Your LINE account’s user ID</td>
+</tr>
+<tr>
+<td align="left"><strong>Linked LINE Official Account</strong></td>
+<td align="left">Your LINE Official Account linked to this channel. You can only link a LINE Official Account from the same provider.</td>
+</tr>
+<tr>
+<td align="left"><strong>Localization</strong></td>
+<td align="left">You can add other languages to provide multi-language support for your channel.</td>
+</tr>
+<tr>
+<td align="left"><strong>Email address permission</strong></td>
+<td align="left">Apply for permission to request a user’s email using OpenID Connect.</td>
+</tr>
+<tr>
+<td align="left"><strong>Delete</strong></td>
+<td align="left">Delete this channel.</td>
+</tr>
+</tbody></table>
+<h2 id="步骤四：尝试登录"><a href="#步骤四：尝试登录" class="headerlink" title="步骤四：尝试登录"></a>步骤四：尝试登录</h2><ol>
+<li>浏览器进入应用根地址</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301180927019.png" alt="LINE Login starter app login"></p>
+<ol start="2">
+<li><p>点击按钮，通过提示完成Line登录</p>
+</li>
+<li><p>尝试对Token进行操作：</p>
+<ol>
+<li>Verify the user access token</li>
+<li>Refresh the user access token</li>
+<li>Revoke the access token (log out)</li>
+</ol>
+</li>
+<li><p>查看控制台拿到的用户信息</p>
+</li>
+</ol>
+<h2 id="步骤五：进一步配置程序"><a href="#步骤五：进一步配置程序" class="headerlink" title="步骤五：进一步配置程序"></a>步骤五：进一步配置程序</h2><p>关于程序的进一步配置，可以通过<a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/line-login/integrate-line-login">文档</a>去了解不同模块的设置和效果，我就不展开了，比如设置不同的Scopes获取不同需要的信息，我把它截取出来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301181629746.png" alt="image-20240301181629746"></p>
+<p>OK，写完下班，快乐周末~</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/02/29/2%E6%9C%8827-29%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/">2月27-29日工作内容 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5Line%E7%99%BB%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">Web应用接入Line登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E4%B9%8B%E5%89%8D"><span class="toc-number">1.1.</span> <span class="toc-text">开始之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%B8%80%EF%BC%9A%E5%88%9B%E5%BB%BALine-Login-Channel"><span class="toc-number">1.2.</span> <span class="toc-text">步骤一：创建Line Login Channel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%BA%8C%EF%BC%9A%E9%83%A8%E7%BD%B2starter%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">步骤二：部署starter应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%B8%89%EF%BC%9A%E6%A3%80%E6%9F%A5Channel%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%B9%B6%E5%A1%AB%E5%85%A5%E5%9B%9E%E8%B0%83%E5%9C%B0%E5%9D%80"><span class="toc-number">1.4.</span> <span class="toc-text">步骤三：检查Channel设置，并填入回调地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E5%9B%9B%EF%BC%9A%E5%B0%9D%E8%AF%95%E7%99%BB%E5%BD%95"><span class="toc-number">1.5.</span> <span class="toc-text">步骤四：尝试登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%BA%94%EF%BC%9A%E8%BF%9B%E4%B8%80%E6%AD%A5%E9%85%8D%E7%BD%AE%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.6.</span> <span class="toc-text">步骤五：进一步配置程序</span></a></li></ol></li></ol></div></div><footer><nobr><span class="text-title">ICP</span><a class="text-content" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备19120384号-2</a></nobr><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
