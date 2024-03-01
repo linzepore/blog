@@ -6,7 +6,7 @@
   <link href="https://blog.zepo.re/atom.xml" rel="self"/>
   
   <link href="https://blog.zepo.re/"/>
-  <updated>2024-02-27T01:23:15.454Z</updated>
+  <updated>2024-03-01T07:19:33.071Z</updated>
   <id>https://blog.zepo.re/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2月27-29日工作内容</title>
+    <link href="https://blog.zepo.re/2024/02/29/2%E6%9C%8827-29%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/"/>
+    <id>https://blog.zepo.re/2024/02/29/2%E6%9C%8827-29%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/</id>
+    <published>2024-02-29T09:01:22.000Z</published>
+    <updated>2024-03-01T07:19:33.071Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2月27-29日工作内容"><a href="#2月27-29日工作内容" class="headerlink" title="2月27-29日工作内容"></a>2月27-29日工作内容</h1><h2 id="今天（27号）六级放榜"><a href="#今天（27号）六级放榜" class="headerlink" title="今天（27号）六级放榜"></a>今天（27号）六级放榜</h2><p>开始工作了之后感觉学校的事情有一些距离感了，特别是长期的游戏时间，麻木了我的紧张情绪。</p><p>学生时代，很容易因为一点点成绩而满足，但其实学生时代的成就感，到了工作就啥也不是，在工作、在赚钱面前，并没有太大优势。</p><p>一边工作一边复习，希望自己找回状态吧，时间不多了。</p><h2 id="Java兼容PHP版本加密方式"><a href="#Java兼容PHP版本加密方式" class="headerlink" title="Java兼容PHP版本加密方式"></a>Java兼容PHP版本加密方式</h2><p>公司的一个老系统原先使用PHP开发的，后来改用Java开发，接口啥的也倒是按照PHP版本的设计的，目前两套系统数据库是共用的，于是就出现了一个问题：</p><blockquote><p>相同的密码，PHP版本的登录得上，Java的就登陆不上</p></blockquote><p>查看Java服务器后台日志，发现了那个时间的错误：</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301150301565.png" alt="image-20240301150301565"></p><p>找到对应的行数，发现是解密过程出的错误，Java代码里面采用的是DES加解密方式，奇怪的是我用数据库中的密码尝试进行解密，却出现了跟服务器上面一样的错误。</p><p>经过一翻折腾询问前面的后端开发得知：PHP版本的加解密方式跟Java的不一样，离了个大谱！</p><p>这特喵怎么可能能够共用一套系统的？？</p><p>正所谓前人挖坑，后人填。</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301151502169.png" alt="image-20240301151502169"></p><p>我本身只是一个Java后端，PHP逻辑我不清楚，甚至连放在那个文件都不清楚，询问他PHP的加解密Java能实现吗，给我否定的答案。当我继续追问PHP版本的加密方式是什么的时候直接不理我了。</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240301151554124.png" alt="image-20240301151554124"></p><p>寻求前同事帮助无果，出于项目经理的要求，我只能自己在服务器用关键词查找相关的关键词，终于还是找到了。</p><p>具体加密方式不多说，跟位运算相关，很明显Java是能实现的，于是只能写了个来过渡，维持服务正常进行吧，唉~</p><p>好在新系统的接口保持跟PHP的接口一致我才有机会找到PHP加解密的逻辑，打工人真难。</p><h2 id="解决奇葩报错-“java-lang-IllegalStateException-No-subdirectories-found”"><a href="#解决奇葩报错-“java-lang-IllegalStateException-No-subdirectories-found”" class="headerlink" title="解决奇葩报错: “java.lang.IllegalStateException: No subdirectories found”"></a>解决奇葩报错: “java.lang.IllegalStateException: No subdirectories found”</h2><p>将打包后的jar包发布到服务器之后，运行的时候出现了这个错误：</p><blockquote><p>java.lang.IllegalStateException: No subdirectories found for mandatory directory location ‘file:.&#x2F;config&#x2F;*&#x2F;‘.</p></blockquote><p>百思不得其解，GPT给的答案也解决不了，最终居然是在Bing上找到的答案，记录一下：</p><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240229164417351.png" alt="image-20240229164417351"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2月27-29日工作内容&quot;&gt;&lt;a href=&quot;#2月27-29日工作内容&quot; class=&quot;headerlink&quot; title=&quot;2月27-29日工作内容&quot;&gt;&lt;/a&gt;2月27-29日工作内容&lt;/h1&gt;&lt;h2 id=&quot;今天（27号）六级放榜&quot;&gt;&lt;a href=&quot;#今天</summary>
+      
+    
+    
+    
+    <category term="实习记录" scheme="https://blog.zepo.re/categories/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    <category term="Working" scheme="https://blog.zepo.re/categories/Working/"/>
+    
+    <category term="SpringBoot" scheme="https://blog.zepo.re/categories/Working/SpringBoot/"/>
+    
+    
+    <category term="tech" scheme="https://blog.zepo.re/tags/tech/"/>
+    
+    <category term="实习" scheme="https://blog.zepo.re/tags/%E5%AE%9E%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>2月26日工作内容</title>
@@ -574,36 +604,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;Vue2-23-03-28&quot;&gt;&lt;a href=&quot;#Vue2-23-03-28&quot; class=&quot;headerlink&quot; title=&quot;Vue2 - 23-03-28&quot;&gt;&lt;/a&gt;Vue2 - 23-03-28&lt;/h1&gt;&lt;h2 id=&quot;回顾昨日&quot;&gt;&lt;a href=&quot;#回</summary>
-      
-    
-    
-    
-    <category term="Learning" scheme="https://blog.zepo.re/categories/Learning/"/>
-    
-    <category term="Vue2" scheme="https://blog.zepo.re/categories/Learning/Vue2/"/>
-    
-    
-    <category term="learning" scheme="https://blog.zepo.re/tags/learning/"/>
-    
-    <category term="GDIP" scheme="https://blog.zepo.re/tags/GDIP/"/>
-    
-    <category term="Vue2" scheme="https://blog.zepo.re/tags/Vue2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue2 - 23-03-27</title>
-    <link href="https://blog.zepo.re/2023/03/27/2023-03-27.html/"/>
-    <id>https://blog.zepo.re/2023/03/27/2023-03-27.html/</id>
-    <published>2023-03-27T01:05:23.000Z</published>
-    <updated>2023-03-28T07:55:36.710Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Vue2-23-03-27"><a href="#Vue2-23-03-27" class="headerlink" title="Vue2 - 23-03-27"></a>Vue2 - 23-03-27</h1><h2 id="组件的自定义事件"><a href="#组件的自定义事件" class="headerlink" title="组件的自定义事件"></a>组件的自定义事件</h2><p>在父组件中定义自定义事件以及方法（父组件），然后子组件在需要的地方进行触发该事件，可以在第二个以后参数传入子组件的相关东西  </p><p>触发事件之后调用的方法是父组件的方法，父组件给子组件绑定上的自定义事件，然后由子组件触发该事件，进而调用了父组件的方法</p><p>App.vue</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;h1 class=&quot;apph&quot;&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;</span><br><span class="line">  &lt;!-- 通过标签v-on的形式 --&gt;</span><br><span class="line">  &lt;Student v-on:getStudentNameEvent=&quot;getStudentName&quot;/&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;!-- 使用ref+生命周期钩子进行绑定 --&gt;</span><br><span class="line">  &lt;Student ref=&quot;student&quot;/&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;!-- 通过v-bind单向绑定进行传入，子组件props进行接收 --&gt;</span><br><span class="line">  &lt;School :getSchoolName=&#x27;getSchoolName&#x27;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import Student from &quot;./components/Student.vue&quot;</span><br><span class="line">import School from &quot;./components/School.vue&quot;</span><br><span class="line">export default &#123;</span><br><span class="line">    name:&#x27;App&#x27;,</span><br><span class="line">    components:&#123;</span><br><span class="line">        Student,</span><br><span class="line">        School</span><br><span class="line">    &#125;,</span><br><span class="line">    data()&#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        msg:&#x27;你好啊！&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      getSchoolName(name) &#123;</span><br><span class="line">        console.log(&#x27;App得到了学校名称：&#x27;+name);</span><br><span class="line">      &#125;,</span><br><span class="line">      getStudentName(name)&#123;</span><br><span class="line">        console.log(&#x27;App得到了学生姓名：&#x27;+name);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted()&#123;</span><br><span class="line">      this.$refs.student.$on(&#x27;getStudentNameEvent&#x27;, this.getStudentName)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">  .apph&#123;</span><br><span class="line">    background-color: pink;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure><p>Student.vue</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;demo&quot;&gt;</span><br><span class="line">    &lt;h2&gt;学生姓名：&#123;&#123;name&#125;&#125;&lt;/h2&gt;</span><br><span class="line">    &lt;h2&gt;学生年龄：&#123;&#123;age&#125;&#125;&lt;/h2&gt;</span><br><span class="line">    &lt;button @click=&#x27;sendStudentName&#x27;&gt;点我发送学生名给父组件&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name:&#x27;Student&#x27;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            name:&#x27;linzepore&#x27;,</span><br><span class="line">            age:21</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        sendStudentName()&#123;</span><br><span class="line">            //触发tudent实例的zepoevent事件</span><br><span class="line">            this.$emit(&#x27;getStudentNameEvent&#x27;,this.name)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">    .demo &#123;</span><br><span class="line">        background-color: gray;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure><h3 id="自定义组件的两种绑定方式："><a href="#自定义组件的两种绑定方式：" class="headerlink" title="自定义组件的两种绑定方式："></a>自定义组件的两种绑定方式：</h3><ul><li><code>v-on/@</code> + <code>自定义事件名称</code></li><li>标签上加<code>ref</code>属性，在mounted钩子上调用获取的子组件，然后进行绑定，<code>this.$refs</code> + <code>.ref属性值</code> + <code>.$on</code> &#x2F; <code>$once</code></li></ul><h4 id="ref属性忘了？"><a href="#ref属性忘了？" class="headerlink" title="ref属性忘了？"></a>ref属性忘了？</h4><p>参考这篇文章：<a href="https://blog.csdn.net/m0_53022813/article/details/127292442">HERE</a>  </p><ul><li>ref 属性被用来给元素或子组件注册引用信息（id的替代者），相当于对页面元素或子组件标识，使用 ref 属性标识页面元素或子组件之后，被标识的元素或子组件会被所在的组件实例对象收集，挂载在所在组件实例对象的$ref属性上</li><li>ref 属性应用在 html 标签元素上，获取的是对应的<strong>真实DOM元素</strong>；ref 属性应用在组件标签上，获取的是对应<strong>组件实例对象</strong></li></ul><h4 id="还可以加上修饰符"><a href="#还可以加上修饰符" class="headerlink" title="还可以加上修饰符"></a>还可以加上修饰符</h4><p><code>this.$refs.student.$once(&#39;eventName&#39;,params)</code> &#x2F;<br><code>@eventName.once=&#39;methodsName&#39;</code></p><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p>在父组件给子组件标签实例绑定的事件都会被视为自定义事件，如果定义为原生的，可以这样写<code>@click.native</code></p><h3 id="自定义事件在子组件的触发以及在父组件的接收"><a href="#自定义事件在子组件的触发以及在父组件的接收" class="headerlink" title="自定义事件在子组件的触发以及在父组件的接收"></a>自定义事件在子组件的触发以及在父组件的接收</h3><p>假如父组件给子组件绑定<br><code>v-on:eventA=&quot;getParams&quot;</code>，  </p><p>子组件可以通过这种方式触发事件<br><code>this.$emit(&#39;eventA&#39;,param1,param2,param3,...)</code>，  </p><p>那么父组件可以通过定义这种方式进行接收：<br><code>getParams(a, ...params) &#123;&#125;</code></p><h2 id="解绑自定义事件"><a href="#解绑自定义事件" class="headerlink" title="解绑自定义事件"></a>解绑自定义事件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.$off(&#x27;eventName&#x27;)//解绑一个</span><br><span class="line">this.$off([&#x27;eventName1&#x27;,&#x27;eventName2&#x27;])//解绑多个</span><br><span class="line">this.off()//解绑所有</span><br></pre></td></tr></table></figure><h2 id="通过ref传递的时候，回调函数注意事项"><a href="#通过ref传递的时候，回调函数注意事项" class="headerlink" title="通过ref传递的时候，回调函数注意事项"></a>通过ref传递的时候，回调函数注意事项</h2><p>通过ref绑定自定义事件的时候，回调函数要写成箭头函数，要么就得写在methods里，不应该写成普通函数（this的指向变成vc实例）<br><img src="https://cdn.jsdelivr.net/gh/linzepore/blog_imgs@main/img/202303271144123.png"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Vue2-23-03-27&quot;&gt;&lt;a href=&quot;#Vue2-23-03-27&quot; class=&quot;headerlink&quot; title=&quot;Vue2 - 23-03-27&quot;&gt;&lt;/a&gt;Vue2 - 23-03-27&lt;/h1&gt;&lt;h2 id=&quot;组件的自定义事件&quot;&gt;&lt;a href</summary>
       
     
     
