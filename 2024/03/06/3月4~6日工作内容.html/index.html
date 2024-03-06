@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>3月4~6日工作内容 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>3月4~6日工作内容</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-03-06T01:21:22.000Z" id="date"> 2024-03-06</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-03-06T01:27:07.824Z" id="updated"> 2024-03-06</time></div></span></div></div><hr><div id="post-content"><h1 id="3月4-6日工作内容"><a href="#3月4-6日工作内容" class="headerlink" title="3月4~6日工作内容"></a>3月4~6日工作内容</h1><h2 id="接入Line登录与Vue前端的交互"><a href="#接入Line登录与Vue前端的交互" class="headerlink" title="接入Line登录与Vue前端的交互"></a>接入Line登录与Vue前端的交互</h2><p>上周基本完成Line登录的接入，剩下的只有业务的处理。</p>
+<p>今天在写相关的业务的时候发现，Line和国内微信不太一样直接获取得到的userId就是openId，不需要通过code再次获取，但是要命的一点是Line开发者账号获取到的用户信息里面没有手机号。</p>
+<p>客户说只能一时间没办法认证企业Line，只能下次更新了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240304155646269.png" alt="image-20240304155646269"></p>
+<p>我就先把代码放着，捋一下后续的思路：</p>
+<blockquote>
+<p>App通过<code>/lineLogin/gotoauthpage</code>请求Line登录地址，服务端获取回调信息，服务端携带用户信息重定向到App页面，App页面获取参数请求登录接口</p>
+</blockquote>
+<p>之所以要这么做，是为了防止出现跨域的问题。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240304161548505.png" alt="image-20240304161548505"></p>
+<p>随之就是一个难点：<strong>在<code>RestController</code>通常是返回Json或者字符串，如果想要重定向到某一个地址，该怎么做</strong>。</p>
+<p>一个方式是通过<code>HttpServletResponse</code>：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240304161202505.png" alt="image-20240304161202505"></p>
+<p>另一个是GPT提到的，通过<code>HttpHeaders</code>：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240304161409729.png" alt="image-20240304161409729"></p>
+<p>这两种方式我测试都是可行的，各取所好就行。</p>
+<h2 id="Java复习"><a href="#Java复习" class="headerlink" title="Java复习"></a>Java复习</h2><p>这段时间没有太多的bug要改，索性复习一下专业课吧。</p>
+<h3 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a>文件比较</h3><p>在写File的相关操作的时候，发现一个方法<code>compareTo</code>，但是作用的效果不符合预期，主要出现在这三种情况：</p>
+<ol>
+<li><p>file1是通过相对路径创建的，file2是通过<code>file1.getAbsolutePath()</code>创建的：不一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(file.getAbsolutePath());<br>System.out.println(<span class="hljs-string">&quot;比较两个文件：&quot;</span> + file.equals(f2)); <span class="hljs-comment">//FALSE</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>file1是通过相对路径创建的，file2是通过<code>file1.getCanonicalPath()</code>创建的：不一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(file.getCanonicalPath());<br>System.out.println(<span class="hljs-string">&quot;比较两个文件：&quot;</span> + file.equals(f2)); <span class="hljs-comment">//FALSE</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>file1是通过相对路径的目录+文件名两步创建的，file2是通过<code>file1.getCanonicalPath()</code>创建的：不一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(file.getCanonicalPath());<br>System.out.println(<span class="hljs-string">&quot;比较两个文件：&quot;</span> + file.equals(f2)); <span class="hljs-comment">//FALSE</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>也就是说file1是通过相对路径创建的情况下，file2也需要是通过相对路径创建的，两者<code>compareTo</code>或<code>equals</code>的结果才会使一样。</p>
+<p>所以像这种情况需要比较的其实是绝对路径，即<code>file.getAbsolutePath().equals(f2.getCanonicalPath()</code>或者<code>file.getCanonicalPath().equals(f2.getCanonicalPath()</code>，又或者<code>file.getAbsolutePath().equals(f2.getAbsolutePath()</code></p>
+<p>然后测完还看到一篇类似的文章，印证了我的想法。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="一键删除"><a href="#一键删除" class="headerlink" title="一键删除"></a>一键删除</h2><p>今天客户的一个需求，项目经理跟我描述时候是这样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240306081121394.png" alt="image-20240306081121394"></p>
+<p>昨晚功能来到客户这边的反馈却是：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240306083339145.png" alt="image-20240306083339145"><br>所以需求就变成了对现在列出客户进行批量删除，那么就需要看看获取的接口列出的数据有哪些。很这里面的数据到底有哪一些，奇怪的是这个接口请求时候携带的参数中，除了分页并没有特别明确的限制条件，难道是列出全部数据吗？</p>
+<p>带着这个疑问，那我就将数据库列出表里未删除的数据量跟系统现在这个区域的数量进行比较，数量是一致的，接口写完，剩下的就是前端的事情了。</p>
+<p>涉及这种敏感的大批量操作一定要小心再小心，客户操作的时候可以备份一下表，防止他们又反悔了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240306085047403.png" alt="image-20240306085047403"></p>
+<h2 id="与前端发生的一些问题"><a href="#与前端发生的一些问题" class="headerlink" title="与前端发生的一些问题"></a>与前端发生的一些问题</h2><p>最近发生了一些不愉快的事情，公司新来的所谓干了三年的前端，水得一匹，装个前端环境一直抱怨着抱怨那，不是电脑不行就是网络不行。原本这跟我无关，我只需要做好自己的事情就行，可惨的是我一个后端需要跟他对接。</p>
+<p>一开始我抱着一种热心的成分，也刚好有空，帮他解决各种问题，结果第三天他环境还是没配好，他最后竟然一直背后跟组长说是后端的问题？？？我没跟他交接好。可是在这种情况下，我一个后端怎么可能知道前端要交接什么，真是农夫与蛇。</p>
+<p>那天他说他电脑要连的上我这边测试环境，我帮他在电脑用小皮配置了nginx，结果这煞毕连webpack配置不会改，一直BB说是我的问题，我真的一肚子火！！！但我忍住了，跟那组长要来前端的权限，弄完他搞了两天没搞完的前端环境，改了webpack配置甩给他看是不是后端问题。</p>
+<p>然后来到今天，在做需求的时候，无数据的时候给他传了空数组</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgs%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17096283562179.png" alt="企业微信截图_17096283562179"></p>
+<p>然后他说不行，要这样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240306090447984.png" alt="image-20240306090447984"></p>
+<p>我就纳闷了，这两个data不都是空数组吗，结果人家跟我爆了一句我没传<code>__ob__</code>给他，给我整无语了，我是不是还得把原型传给他？</p>
+<p>职场不易，如果后面还有类似情况，我就直接把他的事情反馈出来，我一实习生其实也大不了走人。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/03/01/web%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5Line%E7%99%BB%E5%BD%95.html/">Web应用接入Line登录 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E6%9C%884-6%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">3月4~6日工作内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5Line%E7%99%BB%E5%BD%95%E4%B8%8EVue%E5%89%8D%E7%AB%AF%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="toc-number">1.1.</span> <span class="toc-text">接入Line登录与Vue前端的交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%A4%8D%E4%B9%A0"><span class="toc-number">1.2.</span> <span class="toc-text">Java复习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%AF%94%E8%BE%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">文件比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%94%AE%E5%88%A0%E9%99%A4"><span class="toc-number">1.3.</span> <span class="toc-text">一键删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E5%89%8D%E7%AB%AF%E5%8F%91%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">与前端发生的一些问题</span></a></li></ol></li></ol></div></div><footer><nobr><span class="text-title">ICP</span><a class="text-content" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备19120384号-2</a></nobr><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
