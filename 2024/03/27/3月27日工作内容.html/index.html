@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>3月27日工作内容 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>3月27日工作内容</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-03-27T05:21:22.000Z" id="date"> 2024-03-27</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-04-01T07:45:44.866Z" id="updated"> 2024-04-01</time></div></span></div></div><hr><div id="post-content"><h1 id="3月27日工作内容"><a href="#3月27日工作内容" class="headerlink" title="3月27日工作内容"></a>3月27日工作内容</h1><h2 id="解决数据库插入表情包问题"><a href="#解决数据库插入表情包问题" class="headerlink" title="解决数据库插入表情包问题"></a>解决数据库插入表情包问题</h2><blockquote>
+<p>报错：1366-Incorrectstringvalue:”\xF0\x9F\x92\xA5\xF0(x9F.for column’product text’ at row 1</p>
+</blockquote>
+<p>我负责的一个多商户电商系统台湾平台商家客户反馈在上架的时候出现了一个问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240327133617327.png" alt="image-20240327133617327"></p>
+<p>一般来说这时候看日志会更容易找到问题，但是这次因为时间有点久，去查日志因为时间隔的时间有点久会有些麻烦，所以我选择让客户截一下每一步骤的图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240327134237435.png" alt="image-20240327134237435"></p>
+<p>不过这时候客户又触发了一次，然后很快我就在日志上定位到了问题：</p>
+<blockquote>
+<p>1366-Incorrectstringvalue:”\xF0\x9F\x92\xA5\xF0(x9F.for column’product text’ at row 1</p>
+</blockquote>
+<p>结合图中他编辑插入的文本，应该是emoji表情符号的问题。</p>
+<p><code>MySQL</code>中的<code>uftmb4</code>格式是可以存表情符号的，但是只是在建库、建表的时候选择这个编码其实并没有用，Navicat在添加字段的时候会默认选择<code>utf8</code>编码（我用的版本是这样的）</p>
+<p><code>utf8</code>默认每个字符最大长度是3，<code>utfmb4</code>默认每个字符最大长度是4</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240327142458995.png" alt="image-20240327142458995"></p>
+<p>解决方式其实就比较简单：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240327141754766.png" alt="image-20240327141754766"></p>
+<p>对列的字符集进行修改，改成<code>utf8mb4</code>就可以了</p>
+<h2 id="解决字段长度过长的问题"><a href="#解决字段长度过长的问题" class="headerlink" title="解决字段长度过长的问题"></a>解决字段长度过长的问题</h2><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240327142856110.png" alt="image-20240327142856110"></p>
+<p>解决完上面那个问题之后还是有问题，日志上显示的是长度过长，那么看语句上的表，然后扩充相应字段的长度限制就好了</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/03/19/3%E6%9C%8815-19%E3%80%8125%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/">3月15-19、25日工作内容 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">3月27日工作内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%92%E5%85%A5%E8%A1%A8%E6%83%85%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">解决数据库插入表情包问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E8%BF%87%E9%95%BF%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">解决字段长度过长的问题</span></a></li></ol></li></ol></div></div><footer><nobr><span class="text-title">ICP</span><a class="text-content" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备19120384号-2</a></nobr><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
