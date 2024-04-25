@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>系统接入LINE Pay的支付方式 | Linzepore's Blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Linzepore's Blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/Donate/"><span class="navItemTitle">Donate</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>系统接入LINE Pay的支付方式</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-04-25T09:11:22.000Z" id="date"> 2024-04-25</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-04-25T09:10:21.413Z" id="updated"> 2024-04-25</time></div></span></div></div><hr><div id="post-content"><h1 id="系统接入LINE-Pay的支付方式"><a href="#系统接入LINE-Pay的支付方式" class="headerlink" title="系统接入LINE Pay的支付方式"></a>系统接入LINE Pay的支付方式</h1><p>LINE Pay是一个日本公司的。LINE Pay是LY Corporation的移动支付平台，用户可于合作商家以QR码或NFC等非接触方式结账付款，并可在LINE好友间免手续费转账。LINE Pay现于泰国和台湾之间可跨境使用。</p>
+<p>类似微信支付和支付宝支付，LINE Pay支持作为第三方支付方式接入网站。</p>
+<p>我接手的一个多商户网站的客户是台湾的，有接入LINE Pay的需求，于是有了这篇文章。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>异常代码：<a target="_blank" rel="noopener" href="https://pay.line.me/tw/developers/apis/onlineApis?locale=zh_TW">pay.line.me&#x2F;tw&#x2F;developers&#x2F;apis&#x2F;onlineApis?locale&#x3D;zh_TW</a></p>
+<p>API及其请求和响应参数：<a target="_blank" rel="noopener" href="https://pay.line.me/tw/developers/apis/onlineApis?locale=zh_TW">pay.line.me&#x2F;tw&#x2F;developers&#x2F;apis&#x2F;onlineApis?locale&#x3D;zh_TW</a></p>
+<p>获取Channel信息的管理平台：<a target="_blank" rel="noopener" href="https://pay.line.me/portal/tw/auth/login">LINE Pay 行動支付</a></p>
+<p>LINE Pay LOGO规范：<a target="_blank" rel="noopener" href="https://pay.line.me/tw/developers/logo/logoGuide?locale=zh_TW">pay.line.me&#x2F;tw&#x2F;developers&#x2F;logo&#x2F;logoGuide?locale&#x3D;zh_TW</a></p>
+<h2 id="一些前置问题及分析"><a href="#一些前置问题及分析" class="headerlink" title="一些前置问题及分析"></a>一些前置问题及分析</h2><h3 id="1-哪些配置是固定的，哪些配置是因人而异的"><a href="#1-哪些配置是固定的，哪些配置是因人而异的" class="headerlink" title="1. 哪些配置是固定的，哪些配置是因人而异的"></a>1. 哪些配置是固定的，哪些配置是因人而异的</h3><p>因为我们这个系统是属于多商户，这意味着一个商家如果要接入LINE Pay，就得创建一个商户ID，我们在准备ChannelId和ChannelSecretKey的时候就不能只是放在配置文件了，而是要根据商户去获取，通常写在跟商户表里面。</p>
+<h3 id="2-台币的单位"><a href="#2-台币的单位" class="headerlink" title="2. 台币的单位"></a>2. 台币的单位</h3><p>系统中使用的货币Java类型是BigDecimal，在发送请求的时候却报了异常：<code>1124 金額有誤（scale）</code>，尝试将类型改成Double和Float却没有效果之后，换成Integer便成功了，先是搜索台币是不是没有角分，得到答案之后再跟客户做了确认，确实是这样。</p>
+<h3 id="3-电脑端怎么完成测试，总是提示跳转LINE-App"><a href="#3-电脑端怎么完成测试，总是提示跳转LINE-App" class="headerlink" title="3.电脑端怎么完成测试，总是提示跳转LINE App"></a>3.电脑端怎么完成测试，总是提示跳转LINE App</h3><p>电脑端调试的时候可以使用浏览器开发者工具里面的模拟器，这时候只需要填入邮箱和密码就不会提示跳转LINE了，实际投入使用的时候要根据终端进行判断，如果是手机端可以跳转<code>app</code>字段里面的地址</p>
+<h2 id="LINE-Pay-官方提供的PC版本串接流程"><a href="#LINE-Pay-官方提供的PC版本串接流程" class="headerlink" title="LINE Pay 官方提供的PC版本串接流程"></a>LINE Pay 官方提供的PC版本串接流程</h2><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240422143444016.png" alt="image-20240422143444016"></p>
+<ol>
+<li>由商家网站跳转到LINE App的付款页面</li>
+<li>LINE Pay用户选择付款方式并输入密码，确认付款完成支付</li>
+<li>LINE Pay用户在LINE App确认付款信息</li>
+<li>LINE服务器在等待付款页面收到用户付款成功的状态的时候，会跳转到商家系统按照规范定义好的“confirm url”</li>
+<li>商家服务器confirm url接收到订单号、交易号等信息，调用LINE Pay的Confirm API完成交易</li>
+</ol>
+<p>个人理解可能有所不同，具体还是需要参考官方文档：<a target="_blank" rel="noopener" href="https://pay.line.me/jp/developers/apis/onlineApis?locale=zh_TW">https://pay.line.me/jp/developers/apis/onlineApis?locale=zh_TW</a></p>
+<h2 id="串接-LINE-Pay-的前置工作"><a href="#串接-LINE-Pay-的前置工作" class="headerlink" title="串接 LINE Pay 的前置工作"></a>串接 LINE Pay 的前置工作</h2><h3 id="申请sandBox账号"><a href="#申请sandBox账号" class="headerlink" title="申请sandBox账号"></a>申请sandBox账号</h3><ol>
+<li>在<a target="_blank" rel="noopener" href="https://pay.line.me/tw/developers/techsupport/sandbox/testflow?locale=zh_TW">🖇这个地方</a>申请沙盒账号</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240422144452646.png"></p>
+<ol start="2">
+<li>提交之后会收到邮件，里面会有sandBox账号的信息</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240422145510360.png" alt="image-20240422145510360"></p>
+<h3 id="获取Channel-ID-Secret-Key"><a href="#获取Channel-ID-Secret-Key" class="headerlink" title="获取Channel ID &amp; Secret Key"></a>获取Channel ID &amp; Secret Key</h3><p>申请完SandBox账号之后登录<a target="_blank" rel="noopener" href="https://pay.line.me/portal/tw/auth/login">管理平台</a>，点出“管理連結金鑰”选项，点击查询按钮，在邮箱接收验证码之后填写进去，验证成功便会出现Channel ID &amp; Secret Key</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240422153701664.png" alt="image-20240422153701664"></p>
+<p>密钥信息会在串接LINE Pay的API时候，作为header一并携带过去，在前置分析中已经分析了一般单商户，只有一个收款方，可以直接将密钥信息连同LINE Pay的域名、回调地址一并放在<code>application.yml</code>文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># LINE Pay<br>line-pay:<br>  pattern: &quot;prod&quot; # &quot;local&quot; | &quot;prod&quot; 看是否配置代理<br>  url: &quot;https://sandbox-api-pay.line.me&quot;<br>  channelId: &quot;xxx&quot;<br>  channelSecretKey: &quot;xxxxxxxxxxxxxxxxxxxx&quot;<br>  confirmUrl: $&#123;spring.domain&#125;/api/order/pay/lineConfirm<br>  cancelUrl: $&#123;spring.domain&#125;/api/order/linePay/cancel<br></code></pre></td></tr></table></figure>
+
+<p>因为我需要串接的这个系统是属于多商户的，所以channelId和channelSecretKey我是不放在这里而通过业务中根据商户去数据库中查询的</p>
+<h3 id="白名单设置"><a href="#白名单设置" class="headerlink" title="白名单设置"></a>白名单设置</h3><p>LINE Pay 为了提高安全性，要把商店付款的服务器以白名单的方式进行管理，组织来路不明的请求，这里由于我们开发阶段所以填入我们的ip跟本机ip就行（不过好像测试环境不设置也可以）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240422163446309.png" alt="image-20240422163446309"></p>
+<h2 id="串接流程"><a href="#串接流程" class="headerlink" title="串接流程"></a>串接流程</h2><h3 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h3><p>LINE Pay的API调用的时候有一定的认证要求，GET和POST方式的请求也不同，主要是这几个：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Data type</th>
+<th align="center">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Content-Type</td>
+<td align="left">String</td>
+<td align="center">Y</td>
+<td align="left">application&#x2F;json</td>
+</tr>
+<tr>
+<td align="left">X-LINE-ChannelId</td>
+<td align="left">String</td>
+<td align="center">Y</td>
+<td align="left">金流整合資訊 - Channel ID</td>
+</tr>
+<tr>
+<td align="left">X-LINE-MerchantDeviceProfileId</td>
+<td align="left">String</td>
+<td align="center">N</td>
+<td align="left">實體商家支援 - Device Type</td>
+</tr>
+<tr>
+<td align="left">X-LINE-Authorization-Nonce</td>
+<td align="left">String</td>
+<td align="center">Y</td>
+<td align="left">UUID or timestamp(時間戳)</td>
+</tr>
+<tr>
+<td align="left">X-LINE-Authorization</td>
+<td align="left">String</td>
+<td align="center">Y</td>
+<td align="left">HMAC Base64 簽章</td>
+</tr>
+</tbody></table>
+<p>具体的要求可以从LINE 官方API文档查看，上面也有一个Java的例子。我在GitHub上面找到了一个写得很规范的Demo：<a target="_blank" rel="noopener" href="https://github.com/lixchengyu/line-pay">lixchengyu&#x2F;line-pay: Integrate LINE Pay A&#x2F;paymentsPI (github.com)</a>，省去我们写映射类的麻烦。作者还给本地配置了证书使得可以正常地通过<code>https</code>请求本机</p>
+<p>由于官方没有提供相关的SDK，这份规范的Demo可以帮助我们高效地串接LINE Pay，不用关心Header怎么封装，当然也可以自己参照官方的文档慢慢做：<code>Signature = Base64(HMAC-SHA256(Your ChannelSecret, (Your ChannelSecret + URI + RequestBody + nonce)))</code></p>
+<p>作者的README文档大致可以分成三部分：证书的生成与配置、设置<code>channel id</code> 和 <code>channel secret key</code> 并启动项目、请求四个URL</p>
+<p>四个URL的请求是刚好的顺序，请求支付（-&gt;回调）-&gt;确认支付-&gt;退款-&gt;获取订单信息</p>
+<p>测试完之后我们基本熟悉了整一个流程，接下来一步是移植到我们的项目当中，主要步骤如下：</p>
+<h3 id="1-请求一笔新订单"><a href="#1-请求一笔新订单" class="headerlink" title="1. 请求一笔新订单"></a>1. 请求一笔新订单</h3><p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240423171441728.png" alt="image-20240423171441728"></p>
+<p>我们的前端在选择LINE Pay的方式进行确认付款之后，前端会携带着购买的相关参数请求后端，后端收到请求之后会先在系统上创建新订单，再跳转到LINE Pay的请求付款的API（这一步就可以直接使用上面lixchengyu写的Demo的一些方法）</p>
+<p>LINE Pay要求的请求体如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Data type</th>
+<th align="right">Length</th>
+<th align="center">Requirement</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">amount</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">Y</td>
+<td align="left">付款金額 <code>= sum(packages[].amount) + sum(packages[].userFee) + options.shipping.feeAmount</code></td>
+</tr>
+<tr>
+<td align="left">currency</td>
+<td align="left">String</td>
+<td align="right">3</td>
+<td align="center">Y</td>
+<td align="left">貨幣（ISO 4217） 支援貨幣：USD、JPY、TWD、THB</td>
+</tr>
+<tr>
+<td align="left">orderId</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">Y</td>
+<td align="left">商家訂單編號 商家管理的唯一ID</td>
+</tr>
+<tr>
+<td align="left">packages[].id</td>
+<td align="left">String</td>
+<td align="right">50</td>
+<td align="center">Y</td>
+<td align="left">Package list的唯一ID</td>
+</tr>
+<tr>
+<td align="left">packages[].amount</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">Y</td>
+<td align="left">一個Package中的商品總價 <code>=sum(products[].quantity * products[].price)</code></td>
+</tr>
+<tr>
+<td align="left">packages[].userFee</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">手續費：在付款金額中含手續費時設定</td>
+</tr>
+<tr>
+<td align="left">packages[].name</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">N</td>
+<td align="left">Package名稱 （or Shop Name）</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].id</td>
+<td align="left">String</td>
+<td align="right">50</td>
+<td align="center">N</td>
+<td align="left">商家商品ID</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].name</td>
+<td align="left">String</td>
+<td align="right">4000</td>
+<td align="center">Y</td>
+<td align="left">商品名</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].imageUrl</td>
+<td align="left">String</td>
+<td align="right">500</td>
+<td align="center">N</td>
+<td align="left">商品圖示的URL</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].quantity</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">Y</td>
+<td align="left">商品數量</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].price</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">Y</td>
+<td align="left">各商品付款金額</td>
+</tr>
+<tr>
+<td align="left">packages[].products[].originalPrice</td>
+<td align="left">Number</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">各商品原金額</td>
+</tr>
+<tr>
+<td align="left">redirectUrls.appPackageName</td>
+<td align="left">String</td>
+<td align="right">4000</td>
+<td align="center">N</td>
+<td align="left">在Android環境切換應用時所需的資訊，用於防止網路釣魚攻擊（phishing）</td>
+</tr>
+<tr>
+<td align="left">redirectUrls.confirmUrl</td>
+<td align="left">String</td>
+<td align="right">500</td>
+<td align="center">Y</td>
+<td align="left">使用者授權付款後，跳轉到該商家URL</td>
+</tr>
+<tr>
+<td align="left">redirectUrls.confirmUrlType</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">使用者授權付款後，跳轉的confirmUrl類型</td>
+</tr>
+<tr>
+<td align="left">redirectUrls.cancelUrl</td>
+<td align="left">String</td>
+<td align="right">500</td>
+<td align="center">Y</td>
+<td align="left">使用者通過LINE付款頁，取消付款後跳轉到該URL</td>
+</tr>
+<tr>
+<td align="left">options.payment.capture</td>
+<td align="left">Boolean</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">是否自動請款 true(預設)：呼叫Confirm API，統一進行授權&#x2F;請款處理 false：呼叫Confirm API只能完成授權，需要呼叫Capture API完成請款</td>
+</tr>
+<tr>
+<td align="left">options.payment.payType</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">付款類型 NORMAL PREAPPROVED</td>
+</tr>
+<tr>
+<td align="left">options.display.locale</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">等待付款頁的語言程式碼，預設為英文（en） 支援語言：en、ja、ko、th、zh_TW、zh_CN</td>
+</tr>
+<tr>
+<td align="left">options.display.checkConfirmUrlBrowser</td>
+<td align="left">Boolean</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">檢查將用於訪問confirmUrl的瀏覽器 true：如果跟請求付款的瀏覽器不同，引導使用LINE Pay請求付款的瀏覽器 false：無需檢查瀏覽器，直接訪問confirmUrl</td>
+</tr>
+<tr>
+<td align="left">options.shipping.type</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">收貨地選項 NO_SHIPPING FIXED_ADDRESS SHIPPING</td>
+</tr>
+<tr>
+<td align="left">options.shipping.feeAmount</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">運費</td>
+</tr>
+<tr>
+<td align="left">options.shipping.feeInquiryUrl</td>
+<td align="left">String</td>
+<td align="right">500</td>
+<td align="center">N</td>
+<td align="left">查詢配送方式的URL</td>
+</tr>
+<tr>
+<td align="left">options.shipping.feeInquiryType</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">運費查詢類型 CONDITION：收貨地發生變化，就查詢配送方式（運費） FIXED：作為固定值，收貨地發生變化，也不會查詢配送方式</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.country</td>
+<td align="left">String</td>
+<td align="right">2</td>
+<td align="center">N</td>
+<td align="left">收貨國家</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.postalCode</td>
+<td align="left">String</td>
+<td align="right">10</td>
+<td align="center">N</td>
+<td align="left">收貨地郵政編碼</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.state</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">N</td>
+<td align="left">收貨地區</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.city</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">N</td>
+<td align="left">收貨省市區</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.detail</td>
+<td align="left">String</td>
+<td align="right">1000</td>
+<td align="center">N</td>
+<td align="left">收貨地址</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.optional</td>
+<td align="left">String</td>
+<td align="right">1000</td>
+<td align="center">N</td>
+<td align="left">詳細地址資訊</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.firstName</td>
+<td align="left">String</td>
+<td align="right">200</td>
+<td align="center">N</td>
+<td align="left">收貨人名</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.lastName</td>
+<td align="left">String</td>
+<td align="right">200</td>
+<td align="center">N</td>
+<td align="left">收貨人姓</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.firstNameOptional</td>
+<td align="left">String</td>
+<td align="right">200</td>
+<td align="center">N</td>
+<td align="left">詳細名資訊</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.lastNameOptional</td>
+<td align="left">String</td>
+<td align="right">200</td>
+<td align="center">N</td>
+<td align="left">詳細姓資訊</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.email</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">N</td>
+<td align="left">收貨人電子郵件</td>
+</tr>
+<tr>
+<td align="left">options.shipping.address.recipient.phoneNo</td>
+<td align="left">String</td>
+<td align="right">100</td>
+<td align="center">N</td>
+<td align="left">收貨人電話號碼</td>
+</tr>
+<tr>
+<td align="left">options.familyService.addFriends[].type</td>
+<td align="left">String</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">新增好友的服務類型 lineAt</td>
+</tr>
+<tr>
+<td align="left">options.familyService.addFriends[].idList[]</td>
+<td align="left">List</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">各服務類型的ID list</td>
+</tr>
+<tr>
+<td align="left">options.extra.branchName</td>
+<td align="left">String</td>
+<td align="right">200</td>
+<td align="center">N</td>
+<td align="left">商店或分店名稱(僅會顯示前 100 字元)</td>
+</tr>
+<tr>
+<td align="left">options.extra.branchId</td>
+<td align="left">String</td>
+<td align="right">32</td>
+<td align="center">N</td>
+<td align="left">商店或分店代號，可支援英數字及特殊字元</td>
+</tr>
+<tr>
+<td align="left">options.extra.promotionRestriction</td>
+<td align="left">object</td>
+<td align="right"></td>
+<td align="center">N</td>
+<td align="left">點數限制資訊 useLimit: 不可使用點數折抵的金額rewardLimit: 不可回饋點數的金額<code>&quot;promotionRestriction&quot;: &#123;  &quot;useLimit&quot;: 100,  &quot;rewardLimit&quot;: 100&#125;</code></td>
+</tr>
+</tbody></table>
+<p>测试请求的json可以参照Demo，其中packages列表表示多个店铺，每个店铺（package）可以有多个商品，在请求的时候要避免传入里面没有的，否则会报异常。</p>
+<p>成功请求之后，根据订单的状态变为成功或者取消，LINE Pay服务器会跳转到回调地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240423173020433.png" alt="image-20240423173020433"></p>
+<p>成功请求之后，会返回返回码0000的响应，其中<code>paymentUrl.web</code>或者<code>paymentUrl.app</code>就是我们要跳转的网址</p>
+<h3 id="2-跳转到付款页面模拟付款"><a href="#2-跳转到付款页面模拟付款" class="headerlink" title="2. 跳转到付款页面模拟付款"></a>2. 跳转到付款页面模拟付款</h3><p>前端拿到要跳转的页面之后，可以根据终端的不同选择跳转<code>paymentUrl.web</code>还是<code>paymentUrl.app</code>，区别就是会不会直接跳到LINE App，电脑版看到的界面是这样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240424090840472.png" alt="image-20240424090840472"></p>
+<p>使用一个LINE账号登录完之后就可以看到这个页面，可以放心点击支付，这只是测试使用，不会真实扣款</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240424091902609.png" alt="image-20240424091902609"></p>
+<h3 id="3-跳转到回调地址，完成支付的确认"><a href="#3-跳转到回调地址，完成支付的确认" class="headerlink" title="3. 跳转到回调地址，完成支付的确认"></a>3. 跳转到回调地址，完成支付的确认</h3><p>成功支付完成之后，LINE Pay就会跳转到前面请求的时候携带的设置好的回调地址，也就是跳转到后端服务器的一个接口，LINE Pay那边会同市携带transactionId和orderId。这个接口的具体定义的要求可以参照<a target="_blank" rel="noopener" href="https://pay.line.me/documents/online_v3_cn.html#confirmurl-spec">官方的文档</a>，接收这两个参数，并在拿到这两个参数之后完成相关的订单确认的绑定。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/linzepore/workplace-blog-posts-images@main/imgsimage-20240424095018678.png" alt="image-20240424095018678"></p>
+<p>然后我们需要通过查询和计算订单金额，与订单号、交易货币一起请求确认支付的API。（测试的时候发现虽然点击了确认付款但后端没有请求确认支付的API这种情况，就会出现虽然请求的时候已经生成了交易号，但拿着这个交易号去获取交易信息拿到没有相关的交易号的响应）</p>
+<h3 id="4-跳转到前端付款成功的页面"><a href="#4-跳转到前端付款成功的页面" class="headerlink" title="4. 跳转到前端付款成功的页面"></a>4. 跳转到前端付款成功的页面</h3><p>完成上一步的确认之后，就可以跳转到实现定义好的通用的支付成功的页面了</p>
+<h3 id="5-订单申请退款"><a href="#5-订单申请退款" class="headerlink" title="5. 订单申请退款"></a>5. 订单申请退款</h3><p>要能成功调用退款的API，首先得确保这个交易已经完成，也就是通过<code>/v3/payments</code>API能够正常返回交易信息的</p>
+<p>请求退款的时候，除了最基础的header之外，还需要准备的参数就是交易号以及退款的金额，其他的就根据退款调用的返回结果和业务差异有所不同了</p>
+<p>以上几个步骤完成之后业务也就基本完成了，等审核完成之后，把沙盒地址换成真实的地址之后，就可以正常使用<code>LINE Pay</code>了</p>
+<p>由于涉及到保密的要求，没办法把代码开源出来，可以参考<a target="_blank" rel="noopener" href="https://github.com/lixchengyu/line-pay">lixchengyu&#x2F;line-pay</a>进行调试，很容易可以理解整个逻辑</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/03/27/3%E6%9C%8827%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9.html/">3月27日工作内容 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">Linzepore</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%85%A5LINE-Pay%E7%9A%84%E6%94%AF%E4%BB%98%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">系统接入LINE Pay的支付方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">1.1.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%8F%8A%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">一些前置问题及分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%93%AA%E4%BA%9B%E9%85%8D%E7%BD%AE%E6%98%AF%E5%9B%BA%E5%AE%9A%E7%9A%84%EF%BC%8C%E5%93%AA%E4%BA%9B%E9%85%8D%E7%BD%AE%E6%98%AF%E5%9B%A0%E4%BA%BA%E8%80%8C%E5%BC%82%E7%9A%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 哪些配置是固定的，哪些配置是因人而异的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%B0%E5%B8%81%E7%9A%84%E5%8D%95%E4%BD%8D"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 台币的单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%94%B5%E8%84%91%E7%AB%AF%E6%80%8E%E4%B9%88%E5%AE%8C%E6%88%90%E6%B5%8B%E8%AF%95%EF%BC%8C%E6%80%BB%E6%98%AF%E6%8F%90%E7%A4%BA%E8%B7%B3%E8%BD%ACLINE-App"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.电脑端怎么完成测试，总是提示跳转LINE App</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LINE-Pay-%E5%AE%98%E6%96%B9%E6%8F%90%E4%BE%9B%E7%9A%84PC%E7%89%88%E6%9C%AC%E4%B8%B2%E6%8E%A5%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">LINE Pay 官方提供的PC版本串接流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E6%8E%A5-LINE-Pay-%E7%9A%84%E5%89%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">串接 LINE Pay 的前置工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B3%E8%AF%B7sandBox%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.4.1.</span> <span class="toc-text">申请sandBox账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96Channel-ID-Secret-Key"><span class="toc-number">1.4.2.</span> <span class="toc-text">获取Channel ID &amp; Secret Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BD%E5%90%8D%E5%8D%95%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.4.3.</span> <span class="toc-text">白名单设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E6%8E%A5%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">串接流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="toc-number">1.5.1.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AF%B7%E6%B1%82%E4%B8%80%E7%AC%94%E6%96%B0%E8%AE%A2%E5%8D%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">1. 请求一笔新订单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%BB%98%E6%AC%BE%E9%A1%B5%E9%9D%A2%E6%A8%A1%E6%8B%9F%E4%BB%98%E6%AC%BE"><span class="toc-number">1.5.3.</span> <span class="toc-text">2. 跳转到付款页面模拟付款</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B7%B3%E8%BD%AC%E5%88%B0%E5%9B%9E%E8%B0%83%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%AE%8C%E6%88%90%E6%94%AF%E4%BB%98%E7%9A%84%E7%A1%AE%E8%AE%A4"><span class="toc-number">1.5.4.</span> <span class="toc-text">3. 跳转到回调地址，完成支付的确认</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%B7%B3%E8%BD%AC%E5%88%B0%E5%89%8D%E7%AB%AF%E4%BB%98%E6%AC%BE%E6%88%90%E5%8A%9F%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.5.5.</span> <span class="toc-text">4. 跳转到前端付款成功的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AE%A2%E5%8D%95%E7%94%B3%E8%AF%B7%E9%80%80%E6%AC%BE"><span class="toc-number">1.5.6.</span> <span class="toc-text">5. 订单申请退款</span></a></li></ol></li></ol></li></ol></div></div><footer><nobr><span class="text-title">ICP</span><a class="text-content" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备19120384号-2</a></nobr><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
